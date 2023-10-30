@@ -1,0 +1,27 @@
+.burgerConstructor {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 194px auto 40px auto 16px;
+  align-items: center;
+}
+
+.total {
+  display: flex;
+  column-gap: 8px;
+  grid-column: 2;
+}
+
+.icon{
+  width: 36px;
+  height: 36px;
+}
+
+.button {
+  align-self: flex-end;
+  grid-column: 4;
+}

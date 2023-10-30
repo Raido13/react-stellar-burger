@@ -1,0 +1,30 @@
+.ingridient {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  align-items: center;
+  width: 272px;
+  position: relative;
+  cursor: pointer;
+}
+
+.image {
+  height: 120px;
+  width: 240px;
+}
+
+.price {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.icon{
+  width: 24px;
+  height: 24px;
+}
+
+.name {
+  text-align: center;
+  height: 48px;
+}

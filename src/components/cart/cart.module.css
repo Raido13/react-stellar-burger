@@ -1,0 +1,4 @@
+.cart {
+  width: calc(50% - 20px);
+  padding-top: 100px;
+}
