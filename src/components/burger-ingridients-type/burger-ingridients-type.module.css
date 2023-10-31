@@ -1,0 +1,17 @@
+.burgerIngridientsType {
+  display: flex;
+  row-gap: 24px;
+  flex-direction: column;
+}
+
+.title {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  column-gap: 24px;
+  row-gap: 36px;
+  flex-wrap: wrap;
+  padding-left: 16px;
+}

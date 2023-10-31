@@ -6,19 +6,27 @@
 
 .container {
   display: grid;
-  grid-template-columns: 194px auto 40px auto 16px;
+  grid-template-columns: minmax(0, 194px) auto 40px auto 16px;
   align-items: center;
 }
 
 .total {
   display: flex;
+  align-items: center;
   column-gap: 8px;
   grid-column: 2;
 }
 
-.icon{
+.icon { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 36px;
   height: 36px;
+}
+
+.icon > svg {
+  transform: scale(1.5);
 }
 
 .button {

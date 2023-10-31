@@ -2,32 +2,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 16px;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
   list-style-type: none;
   padding: 0;
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 50vh;
-}
-
-.container {
-  display: flex;
-  column-gap: 8px;
-  align-items: center;
-}
-
-.icon {
-  height: 24px;
-  width: 24px;
-  cursor: pointer;
-}
-
-.margin {
-  margin-left: 32px;
+  max-height: 51vh;
 }

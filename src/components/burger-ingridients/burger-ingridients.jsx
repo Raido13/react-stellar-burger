@@ -1,34 +1,24 @@
 import styles from './burger-ingridients.module.css';
-import data from '../../utils/data';
-import Ingridient from '../ingridient/ingridient';
+import BurgerIngridientsType from '../burger-ingridients-type/burger-ingridients-type';
 
-const {type} = data[0];
-
-export default function BurgerIngridients() {
-  const text = (type === 'bun')
-    ? 'Булки'
-    : (type !== 'main')
-      ? 'Соусы'
-      : 'Начинки';
+export default function BurgerIngridients(props) {
+  const {ingridients} = props;
+  const data = [[], [], []];
+  ingridients.map(prop => {
+    return prop.type === 'bun'
+              ? data[0].push(prop)
+              : prop.type === 'sauce'
+                ? data[1].push(prop)
+                : data[2].push(prop)
+  });
 
   return (
     <div className={`${styles.burgerIngridients} custom-scroll`}>
-      <div className={styles.type}>
-        <h2 className={`${styles.title} text text_type_main-medium`}>{text}</h2>
-        <div className={styles.container}>
-        <Ingridient {...data[0]} />
-        <Ingridient {...data[1]} />
-        </div>
-      </div>
-      <div className={styles.type}>
-        <h2 className={`${styles.title} text text_type_main-medium`}>{text}</h2>
-        <div className={styles.container}>
-        <Ingridient {...data[0]} />
-        <Ingridient {...data[1]} />
-        <Ingridient {...data[2]} />
-        <Ingridient {...data[3]} />
-        </div>
-      </div>
+      {data.map(ingridients => {
+        return (
+          <BurgerIngridientsType sortedData={ingridients} ingridientsType={ingridients[0].type} key={ingridients[0].type}/>
+        )
+      })}
     </div>
   )
 }
