@@ -7,3 +7,7 @@
 .margin {
   margin-left: 32px;
 }
+
+.inverse img {
+  transform: rotate(180deg);
+}

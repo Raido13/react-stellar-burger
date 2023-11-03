@@ -1,12 +1,11 @@
 import styles from './constructor-list.module.css';
 import ConstructorIngridient from '../constructor-ingridient/constructor-ingridient';
 
-export default function ConstructorList(props) {
-  const {data} = props;
+export default function ConstructorList({data, deleteIngridient}) {
   return (
     <ul className={`${styles.constructorList} custom-scroll`}>
-      {data.map(ingridient => {
-        return <ConstructorIngridient data={ingridient} key={ingridient._id}/>
+      {data.map((ingridient, id) => {
+        return <ConstructorIngridient ingridient={ingridient} deleteIngridient={deleteIngridient} id={id} key={id}/>
       })}
     </ul>
   )

@@ -1,29 +1,51 @@
 import styles from './constructor-ingridients.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data';
 import ConstructorList from '../constructor-list/constructor-list';
+import bunThumbnail from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 
-export default function ConstructorIngridients() {
-  const {name, image, price} = data[0];
+export default function ConstructorIngridients(props) {
+  const {bun} = props;
   return (
     <div className={styles.constructorIngridients}>
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text={`${name} (верх)`}
-        price={price}
-        thumbnail={image}
-        extraClass={styles.margin}
-      />
-      <ConstructorList data={data}/>
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text={`${name} (низ)`}
-        price={price}
-        thumbnail={image}
-        extraClass={styles.margin}
-      />
+      {bun !== null
+        ? <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
+            extraClass={styles.margin}
+          />
+        : <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={'Добавьте булку'}
+            price={0}
+            thumbnail={bunThumbnail}
+            extraClass={styles.margin}
+          />
+      }
+
+      <ConstructorList {...props}/>
+
+      {bun !== null
+        ? <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
+            extraClass={`${styles.margin} ${styles.inverse}`}
+          />
+        : <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={'Добавьте булку'}
+            price={0}
+            thumbnail={bunThumbnail}
+            extraClass={`${styles.margin} ${styles.inverse}`}
+          />
+      }
     </div>
   )
 }
