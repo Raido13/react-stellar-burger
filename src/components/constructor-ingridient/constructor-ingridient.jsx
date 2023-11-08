@@ -1,5 +1,6 @@
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './constructor-ingridient.module.css';
+import PropTypes from 'prop-types';
 
 export default function ConstructorIngridient({ingridient, id, deleteIngridient}) {
   const { name, price, image, type } = ingridient;
@@ -20,4 +21,10 @@ export default function ConstructorIngridient({ingridient, id, deleteIngridient}
       }
     </>
   )
+}
+
+ConstructorIngridient.propTypes = {
+  ingridient: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  deleteIngridient: PropTypes.func.isRequired
 }

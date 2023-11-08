@@ -1,8 +1,9 @@
 import styles from './burger-ingridients-type.module.css';
 import BurgerIngridient from '../burger-ingridient/burger-ingridient';
+import PropTypes from 'prop-types';
 
 export default function BurgerIngridientsType(props) {
-  const {sortedData, ingridientsType} = {...props};
+  const {sortedData, ingridientsType} = props;
   const text = ingridientsType === 'bun'
                   ? 'Булка'
                   : ingridientsType === 'sauce'
@@ -16,4 +17,9 @@ export default function BurgerIngridientsType(props) {
       </div>
     </div>
   )
+}
+
+BurgerIngridientsType.propTypes = {
+  sortedData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  ingridientsType: PropTypes.string.isRequired
 }

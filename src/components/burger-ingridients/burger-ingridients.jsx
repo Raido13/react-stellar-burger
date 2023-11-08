@@ -1,37 +1,43 @@
 import styles from './burger-ingridients.module.css';
 import BurgerIngridientsType from '../burger-ingridients-type/burger-ingridients-type';
+import PropTypes from 'prop-types';
 
 export default function BurgerIngridients(props) {
-  const {ingridients, tab} = {...props};
-  const data = [[], [], []];
+  const {data, tab} = props;
+  const sortedData = [[], [], []];
 
-  ingridients.map(prop => {
-    return tab === 'one'
-                ? prop.type === 'bun'
-                    ? data[[0]].push(prop)
-                    : prop.type === 'sauce'
-                        ? data[[1]].push(prop)
-                        : data[[2]].push(prop)
-                : tab === 'two'
-                    ? prop.type === 'sauce'
-                        ? data[[0]].push(prop)
-                        : prop.type === 'main'
-                            ? data[[1]].push(prop)
-                            : data[[2]].push(prop)
-                    : prop.type === 'main'
-                            ? data[[0]].push(prop)
-                            : prop.type === 'bun'
-                                ? data[[1]].push(prop)
-                                : data[[2]].push(prop)
-  });
+    data.map(item => {
+      return tab === 'one'
+                  ? item.type === 'bun'
+                      ? sortedData[[0]].push(item)
+                      : item.type === 'sauce'
+                          ? sortedData[[1]].push(item)
+                          : sortedData[[2]].push(item)
+                  : tab === 'two'
+                      ? item.type === 'sauce'
+                          ? sortedData[[0]].push(item)
+                          : item.type === 'main'
+                              ? sortedData[[1]].push(item)
+                              : sortedData[[2]].push(item)
+                      : item.type === 'main'
+                              ? sortedData[[0]].push(item)
+                              : item.type === 'bun'
+                                  ? sortedData[[1]].push(item)
+                                  : sortedData[[2]].push(item)
+    });
 
   return (
     <div className={`${styles.burgerIngridients} custom-scroll`}>
-      {data.map(ingridients => {
+      {sortedData.map((ingridients, index) => {
         return (
-          <BurgerIngridientsType sortedData={ingridients} {...props} ingridientsType={ingridients[0].type} key={ingridients[0].type}/>
+          <BurgerIngridientsType sortedData={ingridients} {...props} ingridientsType={ingridients[0].type} key={index}/>
         )
       })}
     </div>
   )
+}
+
+BurgerIngridients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  tab: PropTypes.string.isRequired
 }
