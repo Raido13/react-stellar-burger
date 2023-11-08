@@ -1,0 +1,13 @@
+.constructorIngridients {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.margin {
+  margin-left: 32px;
+}
+
+.inverse img {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,9 @@
+.constructorIngridient {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.constructorIngridient > svg {
+  cursor: grab;
+}

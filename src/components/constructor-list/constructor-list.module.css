@@ -1,0 +1,11 @@
+.constructorList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 51vh;
+}
