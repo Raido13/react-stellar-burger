@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import IngridientDetails from '../Ingridient-details/Ingridient-details';
 import OrderDetails from '../order-details/order-details';
-
-import ModalOverlay from '../modal-overlay/modal-overlay';
+import Modal from '../modal/modal';
+import {ingredientTypes} from '../../utils/types';
 
 
 export default function Main(props) {
@@ -67,12 +67,12 @@ export default function Main(props) {
     <main className={styles.main}>
       <Menu addIngridient={addIngridient} tab={tab} setCurrent={setCurrent} {...props} openModal={openIngridientModal} getCounter={getCounter} />
       <Cart data={ingridient} deleteIngridient={deleteIngridient} bun={bun} openModal={openOrderModal} />
-      {ingridientData && <ModalOverlay closeModal={closeIngridientModal}><IngridientDetails ingridientData={ingridientData} /></ModalOverlay>}
-      {orderPopup && <ModalOverlay closeModal={closeOrderModal}><OrderDetails /></ModalOverlay>}
+      {ingridientData && <Modal closeModal={closeIngridientModal}><IngridientDetails ingridientData={ingridientData} /></Modal>}
+      {orderPopup && <Modal closeModal={closeOrderModal}><OrderDetails /></Modal>}
     </main>
   ) 
 }
 
 Main.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
 }

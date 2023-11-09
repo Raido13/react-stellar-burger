@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
-import GetIngridients from '../../utils/api';
+import {getIngridients} from '../../utils/api';
 
 function App() {
   const [state, setState] = useState({
@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     setState({...state, isLoading: true})
-    GetIngridients()
+    getIngridients()
       .then(data => setState({...state, isLoading: false, data: data}))
       .catch(() => setState({...state, isLoading: false, hasError: true}))
   }, []);

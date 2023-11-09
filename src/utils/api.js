@@ -1,17 +1,23 @@
-const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
+const baseUrl = 'https://norma.nomoreparties.space/api/';
 
-const getData = res => {
+const checkResponse = (res) => {
   return res.ok
             ? res.json()
             : Promise.reject(`Ошибка ${res.status}`)
 }
 
-export default function GetIngridients() {
-  return fetch(baseUrl)
-            .then(getData)
-            .then(ingridients => {
-              return ingridients?.success
-                        ? ingridients.data
-                        : Promise.reject(ingridients)
-            })
+const checkSuccess = (res) => {
+  return res?.success
+              ? res.data
+              : Promise.reject(res)
+}
+
+const request = (endpoint, options) => {
+  return fetch(`${baseUrl}${endpoint}`, options)
+            .then(checkResponse)
+            .then(checkSuccess)
+}
+
+export const getIngridients = () => {
+  return request('ingredients')
 }

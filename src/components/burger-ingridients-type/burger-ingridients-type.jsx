@@ -1,6 +1,7 @@
 import styles from './burger-ingridients-type.module.css';
 import BurgerIngridient from '../burger-ingridient/burger-ingridient';
 import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function BurgerIngridientsType(props) {
   const {sortedData, ingridientsType} = props;
@@ -20,6 +21,6 @@ export default function BurgerIngridientsType(props) {
 }
 
 BurgerIngridientsType.propTypes = {
-  sortedData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  sortedData: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
   ingridientsType: PropTypes.string.isRequired
 }

@@ -1,5 +1,5 @@
 import styles from './Ingridient-details.module.css';
-import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function IngridientDetails(props) {
   const {ingridientData} = props;
@@ -32,5 +32,5 @@ export default function IngridientDetails(props) {
 }
 
 IngridientDetails.propTypes = {
-  ingridientData: PropTypes.object.isRequired
+  ingridientData: ingredientTypes.isRequired
 }

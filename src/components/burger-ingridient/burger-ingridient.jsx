@@ -1,6 +1,7 @@
 import styles from './burger-ingridient.module.css';
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function BurgerIngridient(props) {
   const {ingridient, addIngridient, getCounter, openModal} = props;
@@ -22,7 +23,7 @@ export default function BurgerIngridient(props) {
 }
 
 BurgerIngridient.propTypes = {
-  ingridient: PropTypes.object.isRequired,
+  ingridient: ingredientTypes.isRequired,
   addIngridient: PropTypes.func.isRequired,
   getCounter: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired

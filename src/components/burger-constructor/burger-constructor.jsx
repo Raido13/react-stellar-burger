@@ -2,6 +2,7 @@ import styles from './burger-constructor.module.css';
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ConstructorIngridients from '../constructor-ingridients/constructor-ingridietns';
 import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function BurgerConstructor(props) {
   const {data, bun, openModal} = props;
@@ -26,7 +27,7 @@ export default function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
   bun: PropTypes.oneOfType([
     PropTypes.string.isRequired,
     PropTypes.object.isRequired

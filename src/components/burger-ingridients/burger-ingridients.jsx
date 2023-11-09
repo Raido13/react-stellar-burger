@@ -1,6 +1,7 @@
 import styles from './burger-ingridients.module.css';
 import BurgerIngridientsType from '../burger-ingridients-type/burger-ingridients-type';
 import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function BurgerIngridients(props) {
   const {data, tab} = props;
@@ -38,6 +39,6 @@ export default function BurgerIngridients(props) {
 }
 
 BurgerIngridients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
   tab: PropTypes.string.isRequired
 }

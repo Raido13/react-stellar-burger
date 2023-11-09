@@ -1,7 +1,10 @@
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './modal.module.css';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import ModalOverlay from '../modal-overlay/modal-overlay';
+const modalRoot = document.getElementById('react-modals');
 
 export default function Modal({closeModal, children, onClick}) {
   const closeByEscape = e => {
@@ -16,16 +19,19 @@ export default function Modal({closeModal, children, onClick}) {
     }
   })
 
-  return (
-    <div className={styles.modal} onClick={onClick}>
+  return createPortal(
+    <div className={styles.modal}>
+    <div className={styles.modalContainer}>
       <button className={styles.close} onClick={closeModal}><CloseIcon /></button>
       {children}
     </div>
+    <ModalOverlay closeModal={closeModal}/>
+    </div>,
+    modalRoot
   )
 }
 
 Modal.propTypes = {
-  onClick: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired
 }

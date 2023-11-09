@@ -1,6 +1,7 @@
 import styles from './constructor-list.module.css';
 import ConstructorIngridient from '../constructor-ingridient/constructor-ingridient';
 import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export default function ConstructorList(props) {
   const {data} = props;
@@ -15,6 +16,6 @@ export default function ConstructorList(props) {
 }
 
 ConstructorList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
   deleteIngridient: PropTypes.func.isRequired
 }
