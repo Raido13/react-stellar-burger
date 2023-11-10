@@ -1,5 +1,6 @@
 import styles from './tabs.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types';
 
 
 export default function Tabs({setCurrent, current}) {
@@ -10,4 +11,9 @@ export default function Tabs({setCurrent, current}) {
       <Tab value='three' active={current === 'three'} onClick={setCurrent}>Начинки</Tab>
     </ul>
   )
+}
+
+Tabs.propTypes = {
+  setCurrent: PropTypes.func.isRequired,
+  current: PropTypes.string.isRequired
 }

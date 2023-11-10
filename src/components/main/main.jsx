@@ -1,14 +1,20 @@
 import Menu from '../menu/menu';
 import Cart from '../cart/cart';
 import styles from './main.module.css';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import data from '../../utils/data';
+import IngridientDetails from '../Ingridient-details/Ingridient-details';
+import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
+import {ingredientTypes} from '../../utils/types';
 
 
-export default function Main() {
+export default function Main(props) {
   const [ingridient, setIngridient] = useState([]);
   const [bun, setBun] = useState(null);
   const [tab, setTab] = useState('one');
+  const [ingridientData, setIngridientData] = useState(null);
+  const [orderPopup, setorderPopup] = useState(false);
 
   const getCounter = item => {
     return item.type === 'bun'
@@ -29,7 +35,7 @@ export default function Main() {
     return item = {...item, elemID: `${res}${Date.now()}`};
   }
 
-  const addIngridient = (item) => {
+  const addIngridient = item => {
     item.type === 'bun'
         ? setBun(item)
         : setIngridient(ingridient => [...ingridient, generateID(item)]);
@@ -41,10 +47,32 @@ export default function Main() {
     });
   }
 
+  const openIngridientModal = item => {
+    setIngridientData(item)
+  }
+
+  const openOrderModal = () => {
+    setorderPopup(true)
+  }
+
+  const closeIngridientModal = () => {
+    setIngridientData(null)
+  }
+
+  const closeOrderModal = () => {
+    setorderPopup(false)
+  }
+
   return (
     <main className={styles.main}>
-      <Menu addIngridient={addIngridient} tab={tab} setCurrent={setCurrent} data={data} getCounter={getCounter} />
-      <Cart data={ingridient} deleteIngridient={deleteIngridient} bun={bun}/>
+      <Menu addIngridient={addIngridient} tab={tab} setCurrent={setCurrent} {...props} openModal={openIngridientModal} getCounter={getCounter} />
+      <Cart data={ingridient} deleteIngridient={deleteIngridient} bun={bun} openModal={openOrderModal} />
+      {ingridientData && <Modal closeModal={closeIngridientModal}><IngridientDetails ingridientData={ingridientData} /></Modal>}
+      {orderPopup && <Modal closeModal={closeOrderModal}><OrderDetails /></Modal>}
     </main>
   ) 
+}
+
+Main.propTypes = {
+  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired
 }
