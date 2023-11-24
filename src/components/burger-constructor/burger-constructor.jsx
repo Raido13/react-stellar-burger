@@ -10,6 +10,7 @@ export default function BurgerConstructor(props) {
   const total = data.map(ingridient => {return ingridient.price});
   const totalPrice = (total.reduce((a, b) => a + b, 0) + buns);
   
+  
   return (
     <div className={styles.burgerConstructor}>
       <ConstructorIngridients {...props} />

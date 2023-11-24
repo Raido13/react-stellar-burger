@@ -7,9 +7,9 @@ const checkResponse = (res) => {
 }
 
 const checkSuccess = (res) => {
-  return res?.success
-              ? res.data
-              : Promise.reject(res)
+  return (res?.success)
+            ? res
+            : Promise.reject(res)
 }
 
 const request = (endpoint, options) => {
@@ -20,4 +20,10 @@ const request = (endpoint, options) => {
 
 export const getIngridients = () => {
   return request('ingredients')
+            .then(res => res.data)
+}
+
+export const getOrderNumber = (ids) => {
+  return request(`orders`, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'ingredients': ids})})
+            .then(res => res.order);
 }

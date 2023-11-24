@@ -7,6 +7,7 @@ import IngridientDetails from '../Ingridient-details/Ingridient-details';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 import {ingredientTypes} from '../../utils/types';
+import {getOrderNumber} from '../../utils/api';
 
 
 export default function Main(props) {
@@ -14,7 +15,7 @@ export default function Main(props) {
   const [bun, setBun] = useState(null);
   const [tab, setTab] = useState('one');
   const [ingridientData, setIngridientData] = useState(null);
-  const [orderPopup, setorderPopup] = useState(false);
+  const [orderDetails, setOrderDetailes] = useState(null);
 
   const getCounter = item => {
     return item.type === 'bun'
@@ -52,7 +53,14 @@ export default function Main(props) {
   }
 
   const openOrderModal = () => {
-    setorderPopup(true)
+    getOrderNumber(ingridient.map(it => {return it._id}))
+        .then(data => {
+          setOrderDetailes(data);
+        })
+        .catch(() => {
+          setOrderDetailes({order: 'Не удалось получить номер заказа'})
+        })
+    
   }
 
   const closeIngridientModal = () => {
@@ -60,15 +68,15 @@ export default function Main(props) {
   }
 
   const closeOrderModal = () => {
-    setorderPopup(false)
+    setOrderDetailes(null)
   }
 
   return (
     <main className={styles.main}>
       <Menu addIngridient={addIngridient} tab={tab} setCurrent={setCurrent} {...props} openModal={openIngridientModal} getCounter={getCounter} />
       <Cart data={ingridient} deleteIngridient={deleteIngridient} bun={bun} openModal={openOrderModal} />
-      {ingridientData && <Modal closeModal={closeIngridientModal}><IngridientDetails ingridientData={ingridientData} /></Modal>}
-      {orderPopup && <Modal closeModal={closeOrderModal}><OrderDetails /></Modal>}
+      {ingridientData && <Modal closeModal={closeIngridientModal}><IngridientDetails {...ingridientData} /></Modal>}
+      {orderDetails && <Modal closeModal={closeOrderModal}><OrderDetails {...orderDetails}/></Modal>}
     </main>
   ) 
 }
