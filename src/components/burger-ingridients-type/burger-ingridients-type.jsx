@@ -3,8 +3,7 @@ import BurgerIngridient from '../burger-ingridient/burger-ingridient';
 import PropTypes from 'prop-types';
 import {ingredientTypes} from '../../utils/types';
 
-export default function BurgerIngridientsType(props) {
-  const {ingridients, ingridientsType} = props;
+export default function BurgerIngridientsType({ingridients, ingridientsType}) {
   const text = ingridientsType === 'bun'
                   ? 'Булка'
                   : ingridientsType === 'sauce'

@@ -32,10 +32,10 @@ export const constructorIngridientsReducer = (state = initialState, action) => {
     }
     case GET_COUNTER: {
 			return action.ingridient.type === 'bun'
-								? state.bun?._id === action.ingridient._id
-                        ? {...state, counter: {...state.counter, [action.ingridient._id]: 2}}
-                        : {...state, counter: {...state.counter, [action.ingridient._id]: 0}}
-                : {...state, ingridients: state.ingridients.filter(ingridient => ingridient._id === action.ingridient._id).length}
+								? action.bun !== null
+                            ? {...state, counter: {...state.counter, [action.bun._id]: 0, [action.ingridient._id]: 2}}
+                            : {...state, counter: {...state.counter, [action.ingridient._id]: 2}}
+                : {...state, counter: {...state.counter, [action.ingridient._id]: [...state.ingridients].filter(ingridient => ingridient._id === action.ingridient._id).length}}
 		}
     default: return state;
   }

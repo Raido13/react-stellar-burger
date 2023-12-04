@@ -3,14 +3,15 @@ import styles from './constructor-ingridient.module.css';
 import PropTypes from 'prop-types';
 import {ingredientTypes} from '../../utils/types';
 import { useDispatch } from 'react-redux';
-import {REMOVE_INGRIDIENT_FROM_CART, SET_TOTAL_PRICE} from '../../services/actions/constructor-ingridients';
+import {GET_COUNTER, REMOVE_INGRIDIENT_FROM_CART, SET_TOTAL_PRICE} from '../../services/actions/constructor-ingridients';
 
 export default function ConstructorIngridient({ingridient, id}) {
   const dispatch = useDispatch();
   const { name, price, image, type } = ingridient;
 
   const handleEvents = () => {
-    dispatch({type: REMOVE_INGRIDIENT_FROM_CART, ingridient: ingridient});
+    dispatch({type: REMOVE_INGRIDIENT_FROM_CART, ingridient});
+    dispatch({type: GET_COUNTER, ingridient})
     dispatch({type: SET_TOTAL_PRICE})
   }
 

@@ -5,7 +5,7 @@ import {SWITCH_TAB} from '../../services/actions/event-handler';
 
 
 export default function Tabs() {
-  const tab = useSelector(store => store.eventHandler.tab);
+  const {tab} = useSelector(store => store.eventHandler);
   const dispatch = useDispatch();
   const setCurrent = tab => {
     dispatch({type: SWITCH_TAB, tab: tab })

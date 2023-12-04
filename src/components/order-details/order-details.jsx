@@ -3,7 +3,7 @@ import blot from '../../images/blot.png';
 import styles from './order-details.module.css';
 
 export default function OrderDetails() {
-  const number = useSelector(store => store.orderDetails.number)
+  const {number} = useSelector(store => store.orderDetails)
   return (
     <div className={styles.orderDetails}>
       <h3 className={`${styles.price} text text_type_digits-large`}>{number}</h3>
