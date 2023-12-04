@@ -1,21 +1,15 @@
 import styles from './constructor-list.module.css';
 import ConstructorIngridient from '../constructor-ingridient/constructor-ingridient';
-import PropTypes from 'prop-types';
-import {ingredientTypes} from '../../utils/types';
+import { useSelector } from 'react-redux';
 
-export default function ConstructorList(props) {
-  const {data} = props;
+export default function ConstructorList() {
+  const ingridients = useSelector(store => store.constructorIngridients.ingridients);
 
   return (
     <ul className={`${styles.constructorList} custom-scroll`}>
-      {data.map((ingridient, id) => {
-        return <ConstructorIngridient ingridient={ingridient} {...props} id={id} key={id}/>
+      {ingridients.map((ingridient, id) => {
+        return <ConstructorIngridient ingridient={ingridient} id={id} key={id}/>
       })}
     </ul>
   )
-}
-
-ConstructorList.propTypes = {
-  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
-  deleteIngridient: PropTypes.func.isRequired
 }

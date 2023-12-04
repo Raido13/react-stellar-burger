@@ -1,44 +1,39 @@
 import styles from './burger-ingridients.module.css';
 import BurgerIngridientsType from '../burger-ingridients-type/burger-ingridients-type';
-import PropTypes from 'prop-types';
-import {ingredientTypes} from '../../utils/types';
+import { useSelector } from 'react-redux';
 
-export default function BurgerIngridients(props) {
-  const {data, tab} = props;
+export default function BurgerIngridients() {
+  const tab = useSelector(store => store.eventHandler.tab);
   const sortedData = [[], [], []];
+  const {burgerIngridients} = useSelector(store => store.burgerIngridients)
 
-    data.map(item => {
-      return tab === 'one'
-                  ? item.type === 'bun'
-                      ? sortedData[[0]].push(item)
-                      : item.type === 'sauce'
-                          ? sortedData[[1]].push(item)
-                          : sortedData[[2]].push(item)
-                  : tab === 'two'
-                      ? item.type === 'sauce'
-                          ? sortedData[[0]].push(item)
-                          : item.type === 'main'
-                              ? sortedData[[1]].push(item)
-                              : sortedData[[2]].push(item)
-                      : item.type === 'main'
-                              ? sortedData[[0]].push(item)
-                              : item.type === 'bun'
-                                  ? sortedData[[1]].push(item)
-                                  : sortedData[[2]].push(item)
-    });
+  burgerIngridients.map(ingridient => {
+    return tab === 'one'
+                ? ingridient.type === 'bun'
+                    ? sortedData[[0]].push(ingridient)
+                    : ingridient.type === 'sauce'
+                        ? sortedData[[1]].push(ingridient)
+                        : sortedData[[2]].push(ingridient)
+                : tab === 'two'
+                    ? ingridient.type === 'sauce'
+                        ? sortedData[[0]].push(ingridient)
+                        : ingridient.type === 'main'
+                            ? sortedData[[1]].push(ingridient)
+                            : sortedData[[2]].push(ingridient)
+                    : ingridient.type === 'main'
+                            ? sortedData[[0]].push(ingridient)
+                            : ingridient.type === 'bun'
+                                ? sortedData[[1]].push(ingridient)
+                                : sortedData[[2]].push(ingridient)
+  });
 
   return (
     <div className={`${styles.burgerIngridients} custom-scroll`}>
       {sortedData.map((ingridients, index) => {
         return (
-          <BurgerIngridientsType sortedData={ingridients} {...props} ingridientsType={ingridients[0].type} key={index}/>
+          <BurgerIngridientsType ingridients={ingridients} ingridientsType={ingridients[0].type} key={index}/>
         )
       })}
     </div>
   )
-}
-
-BurgerIngridients.propTypes = {
-  data: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
-  tab: PropTypes.string.isRequired
 }

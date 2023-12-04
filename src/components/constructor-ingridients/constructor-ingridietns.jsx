@@ -2,10 +2,11 @@ import styles from './constructor-ingridients.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorList from '../constructor-list/constructor-list';
 import bunThumbnail from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-export default function ConstructorIngridients(props) {
-  const {bun} = props;
+export default function ConstructorIngridients() {
+  const bun = useSelector(store => store.constructorIngridients.bun);
+
   return (
     <div className={styles.constructorIngridients}>
       {bun !== null
@@ -27,7 +28,7 @@ export default function ConstructorIngridients(props) {
           />
       }
 
-      <ConstructorList {...props}/>
+      <ConstructorList />
 
       {bun !== null
         ? <ConstructorElement
@@ -49,11 +50,4 @@ export default function ConstructorIngridients(props) {
       }
     </div>
   )
-}
-
-ConstructorIngridients.propTypes = {
-  bun: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.object.isRequired
-  ])
 }

@@ -1,17 +1,17 @@
-import {GET_INGRIDIENT_DETAILS, REMOVE_INGRIDIENT_DETAILS} from '../actions/ingridient-details';
+import {SET_INGRIDIENT_DETAILS, REMOVE_INGRIDIENT_DETAILS} from '../actions/ingridient-details';
 
 const initialState = {
-  ingridientDetails: {}
+  ingridient: null
 }
 
 export const ingridientDetailsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_INGRIDIENT_DETAILS: {
-      return {...state, ingridientDetails: action.ingridient}
+  switch(action.type) {
+    case SET_INGRIDIENT_DETAILS: {
+      return {...state, ingridient: action.ingridient}
     }
     case REMOVE_INGRIDIENT_DETAILS: {
-      return {...state, ingridientDetails: {}}
+      return {...state, ingridient: null}
     }
-    default: state;
+    default: return state;
   }
 }

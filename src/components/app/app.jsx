@@ -1,26 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
-import {getIngridients} from '../../utils/api';
+import {getBurgerIngridients} from '../../services/actions/burger-ingridients';
+import { useEffect } from 'react';
 
 function App() {
-  const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
-    data: []
-  })
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    setState({...state, isLoading: true})
-    getIngridients()
-      .then(data => setState({...state, isLoading: false, data: data}))
-      .catch(() => setState({...state, isLoading: false, hasError: true}))
-  }, []);
-  
+    dispatch(getBurgerIngridients());
+  }, [dispatch]);
+  const {isLoading, hasError, burgerIngridients} = useSelector(store => store.burgerIngridients);
+
   return (
     <>
       <AppHeader />
-      {!state.isLoading && !state.hasError && state.data.length && <Main data={state.data}/>}
+      {!isLoading && !hasError && burgerIngridients.length && <Main />}
     </>
   );
 }

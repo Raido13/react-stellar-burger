@@ -1,8 +1,9 @@
+import { useSelector } from 'react-redux';
 import blot from '../../images/blot.png';
 import styles from './order-details.module.css';
-import PropTypes from 'prop-types';
 
-export default function OrderDetails({number}) {
+export default function OrderDetails() {
+  const number = useSelector(store => store.orderDetails.number)
   return (
     <div className={styles.orderDetails}>
       <h3 className={`${styles.price} text text_type_digits-large`}>{number}</h3>
@@ -12,8 +13,4 @@ export default function OrderDetails({number}) {
       <p className={`${styles.awayt} text text_type_main-default text_color_inactive`}>Дождитесь готовности на орбитальной станции</p>
     </div>
   )
-}
-
-OrderDetails.propTypes = {
-  orderDetails: PropTypes.object.isRequired
 }

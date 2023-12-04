@@ -2,9 +2,17 @@ import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger
 import styles from './constructor-ingridient.module.css';
 import PropTypes from 'prop-types';
 import {ingredientTypes} from '../../utils/types';
+import { useDispatch } from 'react-redux';
+import {REMOVE_INGRIDIENT_FROM_CART, SET_TOTAL_PRICE} from '../../services/actions/constructor-ingridients';
 
-export default function ConstructorIngridient({ingridient, id, deleteIngridient}) {
+export default function ConstructorIngridient({ingridient, id}) {
+  const dispatch = useDispatch();
   const { name, price, image, type } = ingridient;
+
+  const handleEvents = () => {
+    dispatch({type: REMOVE_INGRIDIENT_FROM_CART, ingridient: ingridient});
+    dispatch({type: SET_TOTAL_PRICE})
+  }
 
   return (
     <>
@@ -16,7 +24,7 @@ export default function ConstructorIngridient({ingridient, id, deleteIngridient}
             text={name}
             price={price}
             thumbnail={image}
-            handleClose={() => deleteIngridient(ingridient)}
+            handleClose={() => handleEvents()}
           />
         </li>
       }
@@ -26,6 +34,5 @@ export default function ConstructorIngridient({ingridient, id, deleteIngridient}
 
 ConstructorIngridient.propTypes = {
   ingridient: ingredientTypes.isRequired,
-  id: PropTypes.number.isRequired,
-  deleteIngridient: PropTypes.func.isRequired
+  id: PropTypes.number.isRequired
 }

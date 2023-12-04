@@ -15,13 +15,13 @@ const composeEnchancers =
 
 const enchancer = composeEnchancers(applyMiddleware(thunk));
 
-const state = createStore(rootReducer, enchancer);
+const store = createStore(rootReducer, enchancer);
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <Provider {...state}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>
