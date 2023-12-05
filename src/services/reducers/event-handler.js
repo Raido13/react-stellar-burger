@@ -6,6 +6,7 @@ const initialState = {
 }
 
 export const eventHandlerReducer = (state = initialState, action) => {
+	console.log(action);
 	switch(action.type) {
 		case OPEN_MODAL: {
 			return {...state, modal: action.kind}
