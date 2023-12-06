@@ -7,8 +7,8 @@ export const useIntersection = parent => {
     const observableCollection = parent.current?.children;    
 
     const options = {
-      threshold: [1, 0.8, 0.08],
-      rootMargin: '-333px'
+      threshold: [1, .7, .67],
+      rootMargin: '-350px 0px 0px 200px'
     }
 
     const callback = entries => {
@@ -23,7 +23,7 @@ export const useIntersection = parent => {
     };
 
     const observer = new IntersectionObserver(callback, options);
-    [...observableCollection].forEach(element => observer.observe(element));
+    [...observableCollection].reverse().forEach(element => observer.observe(element));
 
     return () => observer.disconnect();
   }, [parent]);
