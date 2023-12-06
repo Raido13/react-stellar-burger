@@ -1,12 +1,13 @@
-import {OPEN_MODAL, CLOSE_MODAL, SWITCH_TAB} from '../actions/event-handler';
+import {OPEN_MODAL, CLOSE_MODAL, SWITCH_TAB, SET_PARENT, SET_IS_HOVER} from '../actions/event-handler';
 
 const initialState = {
 	modal: false,
-	tab: 'one'
+	tab: 'one',
+	parent: null,
+	isHover: false
 }
 
 export const eventHandlerReducer = (state = initialState, action) => {
-	console.log(action);
 	switch(action.type) {
 		case OPEN_MODAL: {
 			return {...state, modal: action.kind}
@@ -16,6 +17,12 @@ export const eventHandlerReducer = (state = initialState, action) => {
 		}
 		case SWITCH_TAB: {
 			return {...state, tab: action.tab}
+		}
+		case SET_PARENT: {
+			return {...state, parent: action.parent}
+		}
+		case SET_IS_HOVER: {
+			return {...state, isHover: action.isHover}
 		}
 		default: return state;
 	}

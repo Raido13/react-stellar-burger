@@ -4,6 +4,7 @@ import ConstructorIngridients from '../constructor-ingridients/constructor-ingri
 import { useDispatch, useSelector } from 'react-redux';
 import {OPEN_MODAL} from '../../services/actions/event-handler';
 import {getOrderNumberID} from '../../services/actions/order-details';
+import { GET_COUNTER, SET_EMPTY_CART, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -18,7 +19,10 @@ export default function BurgerConstructor() {
     }
     else {
       dispatch(getOrderNumberID(summary()));
-      dispatch({type: OPEN_MODAL, kind: 'order'})
+      dispatch({type: OPEN_MODAL, kind: 'order'});
+      dispatch({type: SET_EMPTY_CART});
+      dispatch({type: SET_TOTAL_PRICE});
+      dispatch({type: GET_COUNTER, ingridient: null, bun})
     }
   }
   

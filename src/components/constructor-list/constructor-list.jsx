@@ -3,12 +3,12 @@ import ConstructorIngridient from '../constructor-ingridient/constructor-ingridi
 import { useSelector } from 'react-redux';
 
 export default function ConstructorList() {
-  const ingridients = useSelector(store => store.constructorIngridients.ingridients);
+  const ingridients = useSelector(store => store.constructorIngridients.ingridients);  
 
   return (
     <ul className={`${styles.constructorList} custom-scroll`}>
       {ingridients.map((ingridient, id) => {
-        return <ConstructorIngridient ingridient={ingridient} id={id} key={id}/>
+        return <ConstructorIngridient ingridient={ingridient} id={id} key={id} />
       })}
     </ul>
   )

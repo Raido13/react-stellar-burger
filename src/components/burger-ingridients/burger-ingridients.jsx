@@ -2,8 +2,8 @@ import styles from './burger-ingridients.module.css';
 import {BurgerIngridientsType} from '../burger-ingridients-type/burger-ingridients-type';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
-import { SWITCH_TAB } from '../../services/actions/event-handler';
-import { useIntersection } from '../../utils/useIntersection';
+import { SET_PARENT, SWITCH_TAB } from '../../services/actions/event-handler';
+import { useIntersection } from '../../hooks/useIntersection';
 
 export default function BurgerIngridients() {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ export default function BurgerIngridients() {
   const parentRef = useRef();
   const currentView = useIntersection(parentRef);
   useEffect(() => {
+    dispatch({type: SET_PARENT, parent: parentRef});
     dispatch({type: SWITCH_TAB, tab: currentView})
   }, [currentView, dispatch]);
 

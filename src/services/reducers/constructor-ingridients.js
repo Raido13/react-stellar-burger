@@ -1,4 +1,4 @@
-import {ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, REMOVE_INGRIDIENT_FROM_CART, GET_COUNTER} from '../actions/constructor-ingridients';
+import {ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, REMOVE_INGRIDIENT_FROM_CART, GET_COUNTER, UPDATE_INGRIDIENT_POSITIONS, SET_EMPTY_CART} from '../actions/constructor-ingridients';
 
 const initialState = {
   ingridients: [],
@@ -31,12 +31,20 @@ export const constructorIngridientsReducer = (state = initialState, action) => {
       return {...state, ingridients: [...state.ingridients].filter(ingridient => ingridient.elemID !== action.ingridient.elemID)}
     }
     case GET_COUNTER: {
-			return action.ingridient.type === 'bun'
-								? action.bun !== null
-                            ? {...state, counter: {...state.counter, [action.bun._id]: 0, [action.ingridient._id]: 2}}
-                            : {...state, counter: {...state.counter, [action.ingridient._id]: 2}}
-                : {...state, counter: {...state.counter, [action.ingridient._id]: [...state.ingridients].filter(ingridient => ingridient._id === action.ingridient._id).length}}
+			return action.ingridient !== null
+                    ? action.ingridient.type === 'bun'
+                            ? action.bun !== null
+                                        ? {...state, counter: {...state.counter, [action.bun._id]: 0, [action.ingridient._id]: 2}}
+                                        : {...state, counter: {...state.counter, [action.ingridient._id]: 2}}
+                            : {...state, counter: {...state.counter, [action.ingridient._id]: [...state.ingridients].filter(ingridient => ingridient._id === action.ingridient._id).length}}
+                    : {...state, counter: {}}
 		}
+    case UPDATE_INGRIDIENT_POSITIONS: {
+      return {...state, ingridients: action.ingridients}
+    }
+    case SET_EMPTY_CART: {
+      return {...state, bun: null, ingridients: []}
+    }
     default: return state;
   }
 }

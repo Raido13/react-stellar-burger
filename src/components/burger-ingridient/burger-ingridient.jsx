@@ -5,11 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import {SET_INGRIDIENT_DETAILS} from '../../services/actions/ingridient-details';
 import {OPEN_MODAL} from '../../services/actions/event-handler';
 import { ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, GET_COUNTER } from '../../services/actions/constructor-ingridients';
+import { useDrag } from 'react-dnd';
 
 export default function BurgerIngridient({ingridient}) {
   const dispatch = useDispatch();
   const {image, name, price, _id} = ingridient;
   const {counter, bun} = useSelector(store => store.constructorIngridients);
+  const [{opacity}, DragRef] = useDrag({
+    type: 'ingridients',
+    item: ingridient,
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? .5 : 1
+    })
+  })
+
   const handleEvents = ingridient => {
     dispatch({type: SET_INGRIDIENT_DETAILS, ingridient});
     dispatch({type: ADD_INGRIDIENT_TO_CART, ingridient});
@@ -19,7 +28,7 @@ export default function BurgerIngridient({ingridient}) {
   }
 
   return (
-    <div className={styles.burgerIngridient} onClick={() => handleEvents(ingridient)} >
+    <div className={styles.burgerIngridient} onClick={() => handleEvents(ingridient)} style={{opacity}} ref={DragRef}>
       {counter[_id] > 0 && <Counter count={counter[_id]} size="default" extraClass="m-1" />}
       <img className={styles.image} src={image} alt={name} />
       <div className={styles.price}><p className={`text text_type_digits-default`}>{price}</p><CurrencyIcon type="primary" /></div>

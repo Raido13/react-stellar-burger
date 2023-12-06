@@ -1,14 +1,12 @@
 import styles from './tabs.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector, useDispatch } from 'react-redux';
-import {SWITCH_TAB} from '../../services/actions/event-handler';
+import { useSelector } from 'react-redux';
 
 
 export default function Tabs() {
-  const {tab} = useSelector(store => store.eventHandler);
-  const dispatch = useDispatch();
+  const {parent, tab} = useSelector(store => store.eventHandler);
   const setCurrent = tab => {
-    dispatch({type: SWITCH_TAB, tab: tab })
+    parent.current?.children[parent.current?.children[tab === 'one' ? 0 : tab === 'two' ? 1 : 2].dataset.id].scrollIntoView({behavior: 'smooth'})
   }
 
   return (
