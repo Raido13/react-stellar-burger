@@ -11,9 +11,9 @@ export default function Tabs() {
 
   return (
     <ul className={styles.tabs}>
-      <Tab value='one' active={tab === 'one'} onClick={setCurrent}>Булки</Tab>
-      <Tab value='two' active={tab === 'two'} onClick={setCurrent}>Соусы</Tab>
-      <Tab value='three' active={tab === 'three'} onClick={setCurrent}>Начинки</Tab>
+      <li><Tab value='one' active={tab === 'one'} onClick={setCurrent}>Булки</Tab></li>
+      <li><Tab value='two' active={tab === 'two'} onClick={setCurrent}>Соусы</Tab></li>
+      <li><Tab value='three' active={tab === 'three'} onClick={setCurrent}>Начинки</Tab></li>
     </ul>
   )
 }
