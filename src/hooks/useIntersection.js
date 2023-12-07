@@ -4,19 +4,19 @@ export const useIntersection = parent => {
   const [currentVisibleId, setCurrentVisibleId] = useState('');
 
   useEffect(() => {
-    const observableCollection = parent.current?.children;    
+    const observableCollection = parent.current?.children;
 
     const options = {
-      threshold: [1, .7, .67],
+      threshold: [1, .7, .46],
       rootMargin: '-350px 0px 0px 200px'
     }
 
     const callback = entries => {
       entries.forEach(entry => {
-        const nextTab = entry.target.dataset.id == 0
+        const nextTab = +entry.target.dataset.id === 0
                           ? 'one'
-                          : entry.target.dataset.id == 1
-                                    ? 'two'
+                          : +entry.target.dataset.id === 1
+                                    ? parent.current?.scrollTop > 40 ? 'two' : 'one'
                                     : 'three';
         entry.isIntersecting && setCurrentVisibleId(nextTab);
       })

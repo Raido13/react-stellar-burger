@@ -21,15 +21,10 @@ export default function ConstructorIngridient({ingridient, id}) {
     })
   }, [ingridients, dispatch])
   
-  const [{isDragging}, drag] = useDrag({
+  const [, drag] = useDrag({
     type: 'move',
     item: {ingridient, id},
-    collect: monitor => ({
-      isDragging: monitor.isDragging()
-    })
   })
-
-  const opacity = isDragging ? 0 : 1;
 
   const [{handlerId}, drop] = useDrop({
     accept: 'move',
@@ -70,7 +65,7 @@ export default function ConstructorIngridient({ingridient, id}) {
   return (
     <>
       {type !== 'bun' &&
-        <li className={styles.constructorIngridient} style={{opacity}} ref={ref} data-handler-id={handlerId}>
+        <li className={styles.constructorIngridient} ref={ref} data-handler-id={handlerId}>
           <DragIcon type="primary" />
           <ConstructorElement
             key={id}

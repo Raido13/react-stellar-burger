@@ -25,7 +25,7 @@ export default function BurgerIngridients() {
   });
 
   return (
-    <div className={`${styles.burgerIngridients} custom-scroll`} ref={parentRef}>
+    <div className={`${styles.burgerIngridients} custom-scroll`} ref={parentRef} >
       {sortedData.map((ingridients, index) => {
         return (
           <BurgerIngridientsType ingridients={ingridients} ingridientsType={ingridients[0].type} key={index} id={index}/>
