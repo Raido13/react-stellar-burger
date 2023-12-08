@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
 }
 
 .margin {
@@ -10,4 +12,8 @@
 
 .inverse img {
   transform: rotate(180deg);
+}
+
+.onHover {
+  border-color: blueviolet;
 }

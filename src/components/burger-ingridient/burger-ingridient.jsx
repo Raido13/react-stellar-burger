@@ -1,20 +1,35 @@
 import styles from './burger-ingridient.module.css';
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import {ingredientTypes} from '../../utils/types';
+import { useDispatch, useSelector } from 'react-redux';
+import {SET_INGRIDIENT_DETAILS} from '../../services/actions/ingridient-details';
+import {OPEN_MODAL} from '../../services/actions/event-handler';
+import { ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, GET_COUNTER } from '../../services/actions/constructor-ingridients';
+import { useDrag } from 'react-dnd';
 
-export default function BurgerIngridient(props) {
-  const {ingridient, addIngridient, getCounter, openModal} = props;
-  const {image, name, price} = ingridient;
-  const counter = getCounter(ingridient);
+export default function BurgerIngridient({ingridient}) {
+  const dispatch = useDispatch();
+  const {image, name, price, _id} = ingridient;
+  const {counter, bun} = useSelector(store => store.constructorIngridients);
+  const [{opacity}, DragRef] = useDrag({
+    type: 'ingridients',
+    item: ingridient,
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? .5 : 1
+    })
+  })
+
   const handleEvents = ingridient => {
-    addIngridient(ingridient)
-    openModal(ingridient)
+    dispatch({type: SET_INGRIDIENT_DETAILS, ingridient});
+    dispatch({type: ADD_INGRIDIENT_TO_CART, ingridient});
+    dispatch({type: GET_COUNTER, ingridient, bun});
+    dispatch({type: SET_TOTAL_PRICE});
+    dispatch({type: OPEN_MODAL, kind: 'ingridient'})
   }
 
   return (
-    <div className={styles.burgerIngridient} onClick={() => handleEvents(ingridient)} >
-      {counter > 0 && <Counter count={counter} size="default" extraClass="m-1" />}
+    <div className={styles.burgerIngridient} onClick={() => handleEvents(ingridient)} style={{opacity}} ref={DragRef}>
+      {counter[_id] > 0 && <Counter count={counter[_id]} size="default" extraClass="m-1" />}
       <img className={styles.image} src={image} alt={name} />
       <div className={styles.price}><p className={`text text_type_digits-default`}>{price}</p><CurrencyIcon type="primary" /></div>
       <p className={`${styles.name} text text_type_main-default`}>{name}</p>
@@ -23,8 +38,5 @@ export default function BurgerIngridient(props) {
 }
 
 BurgerIngridient.propTypes = {
-  ingridient: ingredientTypes.isRequired,
-  addIngridient: PropTypes.func.isRequired,
-  getCounter: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired
+  ingridient: ingredientTypes.isRequired
 }

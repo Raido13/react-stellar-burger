@@ -2,12 +2,27 @@ import styles from './constructor-ingridients.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorList from '../constructor-list/constructor-list';
 import bunThumbnail from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { ADD_INGRIDIENT_TO_CART, GET_COUNTER, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
 
-export default function ConstructorIngridients(props) {
-  const {bun} = props;
+export default function ConstructorIngridients() {
+  const dispatch = useDispatch();
+  const bun = useSelector(store => store.constructorIngridients.bun);
+  const [{isHover}, dropTarget] = useDrop({
+    accept: 'ingridients',
+    collect: monitor => ({
+      isHover: monitor.isOver()
+    }),
+    drop(ingridient) {
+      dispatch({type: ADD_INGRIDIENT_TO_CART, ingridient});
+      dispatch({type: GET_COUNTER, ingridient, bun});
+      dispatch({type: SET_TOTAL_PRICE})
+    }
+  })
+
   return (
-    <div className={styles.constructorIngridients}>
+    <div className={`${styles.constructorIngridients} ${isHover ? styles.onHover : ''}`} ref={dropTarget}>
       {bun !== null
         ? <ConstructorElement
             type="top"
@@ -27,7 +42,7 @@ export default function ConstructorIngridients(props) {
           />
       }
 
-      <ConstructorList {...props}/>
+      <ConstructorList />
 
       {bun !== null
         ? <ConstructorElement
@@ -49,11 +64,4 @@ export default function ConstructorIngridients(props) {
       }
     </div>
   )
-}
-
-ConstructorIngridients.propTypes = {
-  bun: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.object.isRequired
-  ])
 }
