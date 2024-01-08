@@ -9,6 +9,7 @@ import { rootReducer } from "./services/reducers/index";
 import thunk from "redux-thunk";
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from "react-dnd/dist/core";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const composeEnchancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -25,7 +26,9 @@ root.render(
   <React.StrictMode>
     <DndProvider backend={HTML5Backend}>
       <Provider store={store}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </Provider>
     </DndProvider>
   </React.StrictMode>

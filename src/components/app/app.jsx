@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import AppHeader from '../app-header/app-header';
-import Main from '../main/main';
+import styles from './app.module.css';
 import {getBurgerIngridients} from '../../services/actions/burger-ingridients';
 import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Err404 } from '../../pages';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +16,20 @@ function App() {
   return (
     <>
       <AppHeader />
-      {!isLoading && !hasError && burgerIngridients.length && <Main />}
+      <div className={styles.app}>
+      {!isLoading && !hasError && burgerIngridients.length && 
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/signIn' element={<SignIn />} />
+          <Route path='/signUp' element={<SignUp />} />
+          <Route path='/forgot' element={<Forgot />} />
+          <Route path='/recovery' element={<Recovery />} />
+          <Route path='/ingridient' element={<Ingridient />} />
+          {/* <Route path='/account' element={<Account />} />
+          <Route path='*' element={<Err404 />} /> */}
+        </Routes>
+      }
+      </div>
     </>
   );
 }
