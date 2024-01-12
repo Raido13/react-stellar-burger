@@ -3,30 +3,40 @@ import AppHeader from '../app-header/app-header';
 import styles from './app.module.css';
 import {getBurgerIngridients} from '../../services/actions/burger-ingridients';
 import { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Err404 } from '../../pages';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Update, Err404, Orders, Feed } from '../../pages';
+import { ProtectedRoute } from '../protected-route/protected-route';
+import { checkAuth } from '../../services/actions/authentication';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const {isLoading, hasError, burgerIngridients} = useSelector(store => store.burgerIngridients);
+  const {auth} = useSelector(store => store.authentication);
+
   useEffect(() => {
     dispatch(getBurgerIngridients());
+    dispatch(checkAuth());
   }, [dispatch]);
-  const {isLoading, hasError, burgerIngridients} = useSelector(store => store.burgerIngridients);
 
   return (
     <>
       <AppHeader />
       <div className={styles.app}>
-      {!isLoading && !hasError && burgerIngridients.length && 
-        <Routes>
+      {!isLoading && !hasError && burgerIngridients.length && auth !== null &&
+        <Routes location={location}>
           <Route path='/' element={<Home />} />
-          <Route path='/signIn' element={<SignIn />} />
-          <Route path='/signUp' element={<SignUp />} />
-          <Route path='/forgot' element={<Forgot />} />
-          <Route path='/recovery' element={<Recovery />} />
+          <Route path='/signIn' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />
+          <Route path='/signUp' element={<ProtectedRoute unAuth={true} element={<SignUp />} />} />
+          <Route path='/forgot' element={<ProtectedRoute unAuth={true} element={<Forgot />} />} />
+          <Route path='/recovery' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
+          <Route path='/account' element={<ProtectedRoute element={<Account />} />} >
+            <Route path='' element={<ProtectedRoute element={<Update />} />} />
+            <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
+          </Route>
+          <Route path='/feed' element={<Feed />} />
           <Route path='/ingridient' element={<Ingridient />} />
-          {/* <Route path='/account' element={<Account />} />
-          <Route path='*' element={<Err404 />} /> */}
+          <Route path='*' element={<Err404 />} />
         </Routes>
       }
       </div>

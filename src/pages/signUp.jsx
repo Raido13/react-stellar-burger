@@ -1,18 +1,24 @@
-import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import styles from './auth.module.css';
+import { Form } from "../components/form/form";
+import { Field } from "../components/field/field";
+import { userSignUp } from "../services/actions/authentication";
+import { useDispatch } from "react-redux";
 
 export const SignUp = () => {
+  const dispatch = useDispatch()
+  const onSubmit = formState => {
+    dispatch(userSignUp(formState))
+  }
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
-        <h2 className={`text text_type_main-medium ${styles.title}`}>Регистрация</h2>
-        <Input placeholder={'Имя'}></Input>
-        <EmailInput placeholder={'E-mail'}></EmailInput>
-        <PasswordInput placeholder={'Пароль'}></PasswordInput>
-        <Button extraClass={styles.button}>Зарегистрироваться</Button>
-      </form>
+      <Form onSubmit={onSubmit} title={'Регистрация'} button={'Зарегистрироваться'} entries={[
+          { initialValue: '', name: 'name', placeholder: 'Имя', Field: props => <Field {...props} /> },
+          { initialValue: '', name: 'email', placeholder: 'E-mail', Field: props => <Field {...props} /> },
+          { initialValue: '', name: 'password', placeholder: 'Пароль', Field: props => <Field {...props} /> }
+        ]}
+      />
       <ul className={styles.list}>
         <li className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to="/signIn" className={styles.link}>Войти</Link></li>
       </ul>

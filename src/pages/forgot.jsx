@@ -1,16 +1,22 @@
-import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import styles from './auth.module.css';
+import { Form } from "../components/form/form";
+import { Field } from "../components/field/field";
+import { userForgot } from "../services/actions/authentication";
+import { useDispatch } from "react-redux";
 
 export const Forgot = () => {
+  const dispatch = useDispatch();
+  const onSubmit = formState => {
+    dispatch(userForgot(formState))
+  }
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
-        <h2 className={`text text_type_main-medium ${styles.title}`}>Восстановление пароля</h2>
-        <EmailInput placeholder={'Укажите e-mail'}></EmailInput>
-        <Button extraClass={styles.button}>Восстановить</Button>
-      </form>
+      <Form onSubmit={onSubmit} title={'Восстановление пароля'} button={'Восстановить'} entries={[
+          { initialValue: '', name: 'email', placeholder: 'Укажите e-mail', Field: props => <Field {...props} /> },
+        ]}
+      />
       <ul className={styles.list}>
         <li className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to="/signIn" className={styles.link}>Войти</Link></li>
       </ul>

@@ -1,0 +1,15 @@
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 18px;
+  visibility: hidden;
+}
+
+.active {
+  visibility: visible;
+}
+
+.button {
+  align-self: center; 
+}

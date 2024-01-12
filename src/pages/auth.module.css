@@ -6,17 +6,6 @@
   margin-top: 180px;
 }
 
-.title {
-  text-align: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-  justify-content: center;
-}
-
 .list {
   padding: 0;
   margin: 0;
@@ -25,10 +14,6 @@
   row-gap: 16px;
   list-style-type: none;
   text-align: center;
-}
-
-.button {
-  align-self: center; 
 }
 
 .link {
