@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styles from './auth.module.css';
 import { Form } from "../components/form/form";
 import { Field } from "../components/field/field";
-import { userRecovery } from "../services/actions/authentication";
+import { ON_ERROR } from "../services/actions/authentication";
 import { useDispatch } from "react-redux";
+import { postRecovery } from '../utils/api';
 
 export const Recovery = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = formState => {
-    dispatch(userRecovery(formState))
+    postRecovery(formState)
+          .then(() => {
+            localStorage.removeItem('forgot');
+            navigate('/signIn')
+          })
+          .catch(dispatch({type: ON_ERROR}))
   }
 
+  if(!localStorage.getItem('forgot')) {
+    return <Navigate to='/' />
+  }
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Восстановление пароля'} button={'Сохранить'} entries={[

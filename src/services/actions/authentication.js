@@ -1,9 +1,7 @@
-import {postSignUp, postSignIn, postForgot, postRecovery, postLogout, postUpdate, getUser} from '../../utils/api';
+import {postSignUp, postSignIn, postLogout, postUpdate, getUser} from '../../utils/api';
 
 export const SET_USER = 'SET_USER';
 export const SET_AUTH = 'SET_AUTH';
-export const SET_FORGOT = 'SET_FORGOT';
-export const REMOVE_FORGOT = 'REMOVE_FORGOT';
 export const ON_ERROR = 'ON_ERROR';
 
 export const userSignUp = (form) => {
@@ -27,26 +25,6 @@ export const userSignIn = (form) => {
         localStorage.setItem('refreshToken', res.refreshToken);
         dispatch({type: SET_USER, user: res.user});
         dispatch({type: SET_AUTH, auth: true});
-      })
-      .catch(dispatch({type: ON_ERROR}))
-  }
-}
-
-export const userForgot = (form) => {
-  return function(dispatch) {
-    postForgot(form)
-      .then(() => {
-        dispatch({type: SET_FORGOT, approve: true});
-      })
-      .catch(dispatch({type: ON_ERROR}))
-  }
-}
-
-export const userRecovery = (form) => {
-  return function(dispatch) {
-    postRecovery(form)
-      .then(() => {
-        dispatch({type: SET_FORGOT, approve: false});
       })
       .catch(dispatch({type: ON_ERROR}))
   }

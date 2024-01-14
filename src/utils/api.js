@@ -4,7 +4,8 @@ const defaultHeaders = {'Content-Type': 'application/json'};
 const checkResponse = (res) => {
   return res.ok
             ? res.json()
-            : Promise.reject(`Ошибка ${res.status}`)
+            : res.json()
+                  .then(err => Promise.reject(`Ошибка ${err}`));
 }
 
 const checkSuccess = (res) => {
@@ -67,7 +68,7 @@ export const postLogout = () => {
 }
 
 export const postForgot = ({email}) => {
-  return request('auth/password-reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'email': email})})
+  return request('password-reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'email': email})})
 }
 
 export const postRecovery = ({password, token}) => {

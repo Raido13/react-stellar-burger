@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from './auth.module.css';
 import { Form } from "../components/form/form";
 import { Field } from "../components/field/field";
-import { userForgot } from "../services/actions/authentication";
+import { ON_ERROR } from "../services/actions/authentication";
+import { postForgot } from '../utils/api';
 import { useDispatch } from "react-redux";
 
 export const Forgot = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = formState => {
-    dispatch(userForgot(formState))
+    postForgot(formState)
+          .then(() => {
+            localStorage.setItem('forgot', true);
+            navigate('/recovery');
+            console.log(localStorage.getItem('forgot'))
+          })
+          .catch(dispatch({type: ON_ERROR}));
   }
 
   return (
