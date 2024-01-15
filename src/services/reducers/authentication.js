@@ -1,9 +1,10 @@
-import { SET_USER, SET_AUTH, ON_ERROR } from "../actions/authentication";
+import { SET_USER, SET_AUTH, ON_ERROR, REQUEST_USER } from "../actions/authentication";
 
 const initialState = {
   user: null,
   auth: false,
-  hasError: false
+  hasError: false,
+  userRequested: false
 }
 
 export const authenticationReducer = (state = initialState, action) => {
@@ -16,6 +17,9 @@ export const authenticationReducer = (state = initialState, action) => {
     }
     case ON_ERROR: {
       return {...state, hasError: true}
+    }
+    case REQUEST_USER: {
+      return {...state, userRequested: action.request}
     }
     default: return state;
   }

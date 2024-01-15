@@ -3,6 +3,7 @@ import {postSignUp, postSignIn, postLogout, postUpdate, getUser} from '../../uti
 export const SET_USER = 'SET_USER';
 export const SET_AUTH = 'SET_AUTH';
 export const ON_ERROR = 'ON_ERROR';
+export const REQUEST_USER = 'REQUEST_USER';
 
 export const userSignUp = (form) => {
   return function(dispatch) {
@@ -67,6 +68,7 @@ export const userLogout = () => {
 
 export const checkAuth = () => {
   return function(dispatch) {
+    dispatch({type: REQUEST_USER, request: true});
     if(localStorage.getItem('accessToken')) {
       dispatch(setUser())
             .catch(() => {
@@ -74,9 +76,13 @@ export const checkAuth = () => {
               localStorage.removeItem('refreshToken')
               dispatch({type: SET_USER, user: null})
             })
-            .finally(() => dispatch({type: SET_AUTH, auth: true}))
+            .finally(() => {
+              dispatch({type: SET_AUTH, auth: true});
+              dispatch({type: REQUEST_USER, request: false});
+            })
     } else {
-      dispatch({type: SET_AUTH, auth: true})
+      dispatch({type: SET_AUTH, auth: false})
+      dispatch({type: REQUEST_USER, request: false});
     }
   }
 }

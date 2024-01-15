@@ -8,11 +8,12 @@ import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Update, Er
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { checkAuth } from '../../services/actions/authentication';
 
-function App() {
+export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const {isLoading, hasError, burgerIngridients} = useSelector(store => store.burgerIngridients);
+  const {userRequested} = useSelector(store => store.authentication);
 
   const navCloseModal = () => {
     navigate(-1);
@@ -25,31 +26,31 @@ function App() {
 
   return (
     <>
-      <AppHeader />
-      <div className={styles.app}>
       {!isLoading && !hasError && burgerIngridients.length &&
         <>
-          <Routes location={location}>
-            <Route path='' element={<Home />} >
-              {location.state?.ingridientPage && <Route path='ingridients/:id' element={<Ingridient navCloseModal={navCloseModal}/>} />}
-            </Route>
-            <Route path='/signIn' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />
-            <Route path='/signUp' element={<ProtectedRoute unAuth={true} element={<SignUp />} />} />
-            <Route path='/forgot' element={<ProtectedRoute unAuth={true} element={<Forgot />} />} />
-            <Route path='/recovery' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
-            <Route path='/account' element={<ProtectedRoute element={<Account />} />} >
-              <Route path='' element={<ProtectedRoute element={<Update />} />} />
-              <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
-            </Route>
-            <Route path='/feed' element={<Feed />} />
-            <Route path='ingridients/:id' element={<Ingridient />} />
-            <Route path='*' element={<Err404 />} />
-          </Routes>
+          <AppHeader />
+          <div className={styles.app}>
+            {!userRequested &&
+              <Routes location={location}>
+                <Route path='' element={<Home />} >
+                  {location.state?.ingridientPage && <Route path='ingridients/:id' element={<Ingridient navCloseModal={navCloseModal}/>} />}
+                </Route>
+                <Route path='/signIn' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />
+                <Route path='/signUp' element={<ProtectedRoute unAuth={true} element={<SignUp />} />} />
+                <Route path='/forgot' element={<ProtectedRoute unAuth={true} element={<Forgot />} />} />
+                <Route path='/recovery' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
+                <Route path='/account' element={<ProtectedRoute element={<Account />} />} >
+                  <Route path='' element={<ProtectedRoute element={<Update />} />} />
+                  <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
+                </Route>
+                <Route path='/feed' element={<Feed />} />
+                <Route path='ingridients/:id' element={<Ingridient />} />
+                <Route path='*' element={<Err404 />} />
+              </Routes>
+            }
+          </div>
         </>
       }
-      </div>
     </>
-  );
+  )
 }
-
-export default App;

@@ -1,10 +1,11 @@
 import style from './app-header.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export default function AppHeader() {
-  const burgerIngridients = useSelector(store => store.burgerIngridients);
+  const {burgerIngridients} = useSelector(store => store.burgerIngridients);
+  const {pathname} = useLocation();
   const activeText = isActive =>
                         isActive
                               ? `text text_type_main-default`
@@ -14,14 +15,14 @@ export default function AppHeader() {
                               ? 'primary'
                               : 'secondary';
 
-  // const customActive = burgerIngridients.reduce((arr, {_id}) => ([...arr, `/ingridients/${_id}`]), []);
-  // console.log(customActive);
+  const customActive = burgerIngridients.reduce((arr, {_id}) => ([...arr, `/ingridients/${_id}`]), []).includes(pathname);
+
   return (
     <header className={`${style.header} pt-4 pb-4`}>
       <nav className={style.nav}>
         <ul className={style.navContainer}>
           <ol className={style.linksContainer}>
-            <li className='pl-5 pr-5'><NavLink className={style.link} to=''>{({isActive}) => <><BurgerIcon type={activeIcon(isActive)} /><p className={activeText(isActive)}>Конструктор</p></>}</NavLink></li>
+            <li className='pl-5 pr-5'><NavLink className={style.link} to=''>{({isActive}) => <><BurgerIcon type={activeIcon(isActive ? isActive : customActive)} /><p className={activeText(isActive ? isActive : customActive)}>Конструктор</p></>}</NavLink></li>
             <li className='pl-5 pr-5'><NavLink className={style.link} to='/feed'>{({isActive}) => <><ListIcon type={activeIcon(isActive)} /><p className={activeText(isActive)}>Лента заказов</p></>}</NavLink></li>
           </ol>
           <li className={style.logo}><NavLink to='/'><Logo /></NavLink></li>

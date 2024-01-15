@@ -14,7 +14,6 @@ export const Forgot = () => {
           .then(() => {
             localStorage.setItem('forgot', true);
             navigate('/recovery');
-            console.log(localStorage.getItem('forgot'))
           })
           .catch(dispatch({type: ON_ERROR}));
   }
