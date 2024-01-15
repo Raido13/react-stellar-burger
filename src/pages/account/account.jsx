@@ -7,8 +7,8 @@ export const Account = () => {
   const dispatch = useDispatch();
   const active = isActive =>
                   isActive
-                    ? `text text_type_main-medium text_color_inactive ${styles.link} ${styles.active}`
-                    : `text text_type_main-medium text_color_inactive ${styles.link}`;
+                        ? `text text_type_main-medium text_color_inactive ${styles.link} ${styles.active}`
+                        : `text text_type_main-medium text_color_inactive ${styles.link}`;
   const onClick = () => {
     dispatch(userLogout());
   }

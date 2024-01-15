@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export default function IngridientDetails() {
   const {ingridient} = useSelector(store => store.ingridientDetails);
-  console.log(ingridient);
+  
   return (
     <div className={styles.ingridientDetails}>
       <h3 className={`${styles.title} text text_type_main-large`}>Детали ингридиента</h3>
