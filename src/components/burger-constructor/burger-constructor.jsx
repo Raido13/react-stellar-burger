@@ -22,7 +22,7 @@ export default function BurgerConstructor() {
       return;
     }
     if(!auth) {
-      return navigate('/signIn');
+      return navigate('/login');
     }
     else {
       dispatch(getOrderNumberID(summary()));
