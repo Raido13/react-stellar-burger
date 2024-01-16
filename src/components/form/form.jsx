@@ -25,6 +25,9 @@ export const Form = ({onSubmit, entries, title, button}) => {
 
   const resetForm = e => {
     e.preventDefault();
+    if(title === null){
+      setIsVisible(false)
+    }
     setFormState(state);
   }
 
