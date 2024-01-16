@@ -1,0 +1,1 @@
+export const selectorAuthentification = store => store.authentication;

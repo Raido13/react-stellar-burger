@@ -1,0 +1,1 @@
+export const selectorEventHandler = store => store.eventHandler;

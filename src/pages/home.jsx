@@ -5,9 +5,10 @@ import OrderDetails from '../components/order-details/order-details';
 import Modal from '../components/modal/modal';
 import { useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
+import { selectorEventHandler } from '../services/selectors';
 
 export const Home = () => {
-  const {modal} = useSelector(store => store.eventHandler);
+  const {modal} = useSelector(selectorEventHandler);
   const location = useLocation();
 
   return (

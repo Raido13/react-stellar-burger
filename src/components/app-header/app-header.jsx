@@ -2,9 +2,10 @@ import style from './app-header.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import { selectorBurgerIngridients } from '../../services/selectors';
 
 export default function AppHeader() {
-  const {burgerIngridients} = useSelector(store => store.burgerIngridients);
+  const {burgerIngridients} = useSelector(selectorBurgerIngridients);
   const {pathname} = useLocation();
   const activeText = isActive =>
                         isActive

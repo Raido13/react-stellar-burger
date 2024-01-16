@@ -1,8 +1,13 @@
+import { selectorBurgerIngridients } from '../../services/selectors';
 import styles from './Ingridient-details.module.css';
 import { useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
 
 export default function IngridientDetails() {
-  const {ingridient} = useSelector(store => store.ingridientDetails);
+  const {burgerIngridients} = useSelector(selectorBurgerIngridients);
+  const {id} = useParams();
+  
+  const ingridient = burgerIngridients.find(({_id}) => _id === id);
   
   return (
     <div className={styles.ingridientDetails}>

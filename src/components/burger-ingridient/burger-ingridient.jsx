@@ -2,16 +2,16 @@ import styles from './burger-ingridient.module.css';
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientTypes} from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
-import {SET_INGRIDIENT_DETAILS} from '../../services/actions/ingridient-details';
 import { ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, GET_COUNTER } from '../../services/actions/constructor-ingridients';
 import { useDrag } from 'react-dnd';
 import { useLocation, Link } from 'react-router-dom';
+import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function BurgerIngridient({ingridient}) {
   const dispatch = useDispatch();
   const location = useLocation();
   const {image, name, price, _id} = ingridient;
-  const {counter, bun} = useSelector(store => store.constructorIngridients);
+  const {counter, bun} = useSelector(selectorConstructorIngridients);
   const [{opacity}, DragRef] = useDrag({
     type: 'ingridients',
     item: ingridient,
@@ -21,7 +21,6 @@ export default function BurgerIngridient({ingridient}) {
   })
 
   const handleEvents = ingridient => {
-    dispatch({type: SET_INGRIDIENT_DETAILS, ingridient});
     dispatch({type: ADD_INGRIDIENT_TO_CART, ingridient});
     dispatch({type: GET_COUNTER, ingridient, bun});
     dispatch({type: SET_TOTAL_PRICE});

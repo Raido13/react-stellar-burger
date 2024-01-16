@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { useDispatch } from 'react-redux';
 import {CLOSE_MODAL} from '../../services/actions/event-handler';
-import { REMOVE_INGRIDIENT_DETAILS } from '../../services/actions/ingridient-details';
+
 const modalRoot = document.getElementById('react-modals');
 
 export default function Modal({children, navCloseModal}) {
@@ -17,7 +17,6 @@ export default function Modal({children, navCloseModal}) {
 
   const closeByEscape = e => {
     e.key === 'Escape' && navCloseModal !== undefined ? navCloseModal() : closeModal();
-    dispatch({type: REMOVE_INGRIDIENT_DETAILS});
   }
 
   useEffect(() => {
@@ -41,5 +40,6 @@ export default function Modal({children, navCloseModal}) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  navCloseModal: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 }

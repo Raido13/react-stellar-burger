@@ -1,4 +1,5 @@
 import { Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
 
 export const Field = (props) => {
   const {name} = props;
@@ -10,4 +11,8 @@ export const Field = (props) => {
     case 'token': return <Input {...props} />
     default: return <h3>No props</h3>
   }
+}
+
+Field.propTypes = {
+  name: PropTypes.string.isRequired
 }

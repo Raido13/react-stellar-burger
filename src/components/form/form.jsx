@@ -1,6 +1,7 @@
 import styles from './form.module.css';
 import { useState } from "react";
 import { Buttons } from '../buttons/buttons';
+import PropTypes from 'prop-types';
 
 export const Form = ({onSubmit, entries, title, button}) => {
   const state = entries.reduce((obj, it) => ({...obj, [it.name]: it.initialValue}), {})
@@ -36,4 +37,11 @@ export const Form = ({onSubmit, entries, title, button}) => {
       {title === null ? <Buttons button={button} isVisible={isVisible} /> : <Buttons button={button} />}
     </form>
   )
+}
+
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  entries: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  title: PropTypes.string,
+  button: PropTypes.string.isRequired
 }

@@ -7,13 +7,14 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Update, Err404, Orders, Feed } from '../../pages';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { checkAuth } from '../../services/actions/authentication';
+import { selectorAuthentification, selectorBurgerIngridients } from '../../services/selectors';
 
 export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const {isLoading, hasError, burgerIngridients} = useSelector(store => store.burgerIngridients);
-  const {userRequested} = useSelector(store => store.authentication);
+  const {isLoading, hasError, burgerIngridients} = useSelector(selectorBurgerIngridients);
+  const {userRequested} = useSelector(selectorAuthentification);
 
   const navCloseModal = () => {
     navigate(-1);
@@ -32,7 +33,7 @@ export default function App() {
           <div className={styles.app}>
             {!userRequested &&
               <Routes location={location}>
-                <Route path='' element={<Home />} >
+                <Route path='/' element={<Home />} >
                   {location.state?.ingridientPage && <Route path='ingridients/:id' element={<Ingridient navCloseModal={navCloseModal}/>} />}
                 </Route>
                 <Route path='/signIn' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />

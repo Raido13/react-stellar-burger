@@ -1,10 +1,11 @@
 import styles from './tabs.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux';
+import { selectorEventHandler } from '../../services/selectors';
 
 
 export default function Tabs() {
-  const {parent, tab} = useSelector(store => store.eventHandler);
+  const {parent, tab} = useSelector(selectorEventHandler);
   const setCurrent = tab => {
     parent.current?.children[parent.current?.children[tab === 'one' ? 0 : tab === 'two' ? 1 : 2].dataset.id].scrollIntoView({behavior: 'smooth'})
   }

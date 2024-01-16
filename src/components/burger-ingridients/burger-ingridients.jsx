@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { SET_PARENT, SWITCH_TAB } from '../../services/actions/event-handler';
 import { useIntersection } from '../../hooks/useIntersection';
+import { selectorBurgerIngridients } from '../../services/selectors';
 
 export default function BurgerIngridients() {
   const dispatch = useDispatch();
   const sortedData = [[], [], []];
-  const {burgerIngridients} = useSelector(store => store.burgerIngridients);
+  const {burgerIngridients} = useSelector(selectorBurgerIngridients);
   const parentRef = useRef();
   const currentView = useIntersection(parentRef);
   useEffect(() => {

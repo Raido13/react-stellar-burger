@@ -2,10 +2,11 @@ import { Form } from '../../components/form/form';
 import { Field } from "../../components/field/field";
 import { userUpdate } from '../../services/actions/authentication';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectorAuthentification } from '../../services/selectors';
 
 export const Update = () => {
   const dispatch = useDispatch();
-  const {user} = useSelector(store => store.authentication)
+  const {user} = useSelector(selectorAuthentification)
   const onSubmit = formState => {
     dispatch(userUpdate(formState));
   }

@@ -21,5 +21,6 @@ export const BurgerIngridientsType = ({ingridients, ingridientsType, id}) => {
 
 BurgerIngridientsType.propTypes = {
   ingridients: PropTypes.arrayOf(ingredientTypes.isRequired).isRequired,
-  ingridientsType: PropTypes.string.isRequired
+  ingridientsType: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
 }

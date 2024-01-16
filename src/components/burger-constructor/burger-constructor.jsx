@@ -6,10 +6,11 @@ import {OPEN_MODAL} from '../../services/actions/event-handler';
 import {getOrderNumberID} from '../../services/actions/order-details';
 import { GET_COUNTER, SET_EMPTY_CART, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
 import { useNavigate } from 'react-router-dom';
+import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
-  const {bun, ingridients, totalPrice} = useSelector(store => store.constructorIngridients);
+  const {bun, ingridients, totalPrice} = useSelector(selectorConstructorIngridients);
   const {auth} = useSelector(store => store.authentication);
   const navigate = useNavigate();
   const summary = () => {
