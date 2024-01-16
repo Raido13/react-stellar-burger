@@ -13,7 +13,7 @@ export const ProtectedRoute = ({unAuth = false, element}) => {
   }
 
   if(!unAuth && !user) {
-    return <Navigate to='/signIn' state={{from: location}} />
+    return <Navigate to='/login' state={{from: location}} />
   }
 
   return element;

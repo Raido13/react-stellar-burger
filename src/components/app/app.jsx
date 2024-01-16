@@ -36,11 +36,11 @@ export default function App() {
                 <Route path='/' element={<Home />} >
                   {location.state?.ingridientPage && <Route path='ingridients/:id' element={<Ingridient navCloseModal={navCloseModal}/>} />}
                 </Route>
-                <Route path='/signIn' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />
-                <Route path='/signUp' element={<ProtectedRoute unAuth={true} element={<SignUp />} />} />
-                <Route path='/forgot' element={<ProtectedRoute unAuth={true} element={<Forgot />} />} />
-                <Route path='/recovery' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
-                <Route path='/account' element={<ProtectedRoute element={<Account />} />} >
+                <Route path='/login' element={<ProtectedRoute unAuth={true} element={<SignIn />} />} />
+                <Route path='/register' element={<ProtectedRoute unAuth={true} element={<SignUp />} />} />
+                <Route path='/forgot-password' element={<ProtectedRoute unAuth={true} element={<Forgot />} />} />
+                <Route path='/reset-password' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
+                <Route path='/profile' element={<ProtectedRoute element={<Account />} />} >
                   <Route path='' element={<ProtectedRoute element={<Update />} />} />
                   <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
                 </Route>

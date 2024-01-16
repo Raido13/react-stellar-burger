@@ -19,8 +19,8 @@ export const SignIn = () => {
         ]}
       />
       <ul className={styles.list}>
-        <li className="text text_type_main-default text_color_inactive">Вы — новый пользователь? <Link to="/signUp" className={styles.link}>Зарегистрироваться</Link></li>
-        <li className="text text_type_main-default text_color_inactive">Забыли пароль? <Link to="/forgot" className={styles.link}>Восстановить пароль</Link></li>
+        <li className="text text_type_main-default text_color_inactive">Вы — новый пользователь? <Link to="/register" className={styles.link}>Зарегистрироваться</Link></li>
+        <li className="text text_type_main-default text_color_inactive">Забыли пароль? <Link to="/forgot-password" className={styles.link}>Восстановить пароль</Link></li>
       </ul>
     </div>
   )

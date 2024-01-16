@@ -18,10 +18,10 @@ export const Account = () => {
       <nav className={styles.nav}>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <NavLink to='/account' end className={({isActive}) => active(isActive)}>Аккаунт</NavLink>
+            <NavLink to='/profile' end className={({isActive}) => active(isActive)}>Аккаунт</NavLink>
           </li>
           <li className={styles.item}>
-            <NavLink to='/account/orders' className={({isActive}) => active(isActive)}>История заказов</NavLink>
+            <NavLink to='/profile/orders' className={({isActive}) => active(isActive)}>История заказов</NavLink>
           </li>
           <li className={styles.item}>
             <button onClick={onClick} className={`text text_type_main-medium text_color_inactive ${styles.button}`}>Выйти</button>

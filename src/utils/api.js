@@ -39,7 +39,7 @@ export const awaitRequest = async (endpoint, options) => {
     const res = await fetch(`${baseUrl}${endpoint}`, options);
     return await checkResponse(res)
   } catch (err) {
-    if(err.message === 'JWT expired') {
+    if(err.message === 'jwt expired') {
       const refresh = await refreshToken();
       if(!refreshToken.success) {
         return Promise.reject(refresh)
@@ -75,10 +75,10 @@ export const postRecovery = ({password, token}) => {
   return request('password-reset/reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'token': token, 'password': password})})
 }
 
-export const postUpdate = ({name, email}) => {
-  return awaitRequest('auth/user', {method: 'PATCH', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'name': name, 'email': email})})
+export const postUpdate = ({name, email, password}) => {
+  return awaitRequest('auth/user', {method: 'PATCH', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'name': name, 'email': email, 'password': password})})
 }
 
 export const getUser = () => {
-  return awaitRequest('auth/user', {method: 'GET', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}})
+  return awaitRequest('auth/user', {method: 'GET', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}})
 }

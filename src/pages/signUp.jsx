@@ -20,7 +20,7 @@ export const SignUp = () => {
         ]}
       />
       <ul className={styles.list}>
-        <li className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to="/signIn" className={styles.link}>Войти</Link></li>
+        <li className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to="/login" className={styles.link}>Войти</Link></li>
       </ul>
     </div>
   )

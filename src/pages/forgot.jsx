@@ -13,7 +13,8 @@ export const Forgot = () => {
     postForgot(formState)
           .then(() => {
             localStorage.setItem('forgot', true);
-            navigate('/recovery');
+            navigate('/reset-password');
+            console.log(localStorage.getItem('forgot'))
           })
           .catch(dispatch({type: ON_ERROR}));
   }
@@ -25,7 +26,7 @@ export const Forgot = () => {
         ]}
       />
       <ul className={styles.list}>
-        <li className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to="/signIn" className={styles.link}>Войти</Link></li>
+        <li className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to="/login" className={styles.link}>Войти</Link></li>
       </ul>
     </div>
   )

@@ -27,7 +27,7 @@ export default function AppHeader() {
             <li className='pl-5 pr-5'><NavLink className={style.link} to='/feed'>{({isActive}) => <><ListIcon type={activeIcon(isActive)} /><p className={activeText(isActive)}>Лента заказов</p></>}</NavLink></li>
           </ol>
           <li className={style.logo}><NavLink to='/'><Logo /></NavLink></li>
-          <li className={`${style.profile} pl-5 pr-5`}><NavLink className={style.link} to='/account'>{({isActive}) => <><ProfileIcon type={activeIcon(isActive)} /><p className={activeText(isActive)}>Личный кабинет</p></>}</NavLink></li>
+          <li className={`${style.profile} pl-5 pr-5`}><NavLink className={style.link} to='/profile'>{({isActive}) => <><ProfileIcon type={activeIcon(isActive)} /><p className={activeText(isActive)}>Личный кабинет</p></>}</NavLink></li>
         </ul>
       </nav>
     </header>

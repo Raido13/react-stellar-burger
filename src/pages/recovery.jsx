@@ -13,14 +13,19 @@ export const Recovery = () => {
     postRecovery(formState)
           .then(() => {
             localStorage.removeItem('forgot');
-            navigate('/signIn')
+            navigate('/login')
           })
           .catch(dispatch({type: ON_ERROR}))
   }
-
-  if(!localStorage.getItem('forgot')) {
+  console.log(localStorage.getItem('forgot'))
+  if(localStorage.getItem('forgot') === null) {
     return <Navigate to='/' />
   }
+
+  const onClick = () => {
+    localStorage.removeItem('forgot');
+  }
+
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Восстановление пароля'} button={'Сохранить'} entries={[
@@ -29,7 +34,7 @@ export const Recovery = () => {
         ]}
       />
       <ul className={styles.list}>
-        <li className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to="/signIn" className={styles.link}>Войти</Link></li>
+        <li className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to="/login" onClick={onClick} className={styles.link}>Войти</Link></li>
       </ul>
     </div>
   )
