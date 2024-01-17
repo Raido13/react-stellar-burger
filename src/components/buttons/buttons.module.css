@@ -1,8 +1,7 @@
 .buttons {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 18px;
+  justify-content: flex-end;
+  column-gap: 18px;
   visibility: hidden;
 }
 

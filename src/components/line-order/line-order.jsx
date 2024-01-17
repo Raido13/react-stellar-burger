@@ -17,8 +17,10 @@ export const LineOrder = ({ingridients, orderStatus}) => {
         <p className='text text_type_digits-default'>#{orderNumber}</p>
         <p className="text text_type_main-default text_color_inactive">{orderData}</p>
       </div>
-      <p className="text text_type_main-medium">{orderName}</p>
-      <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>
+      <div className={styles.orderOverview}>
+        <p className="text text_type_main-medium">{orderName}</p>
+        <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>
+      </div>
       <div className={styles.ingridientsContainer}>
         <ul className={styles.ingridients}>
           {ingridients.map((ingridient, id) => {
