@@ -1,5 +1,7 @@
+import { Line } from "../../components/line/line"
+
 export const Orders = () => {
   return (
-    <p>Здесь будут ордеры</p>
+    <Line />
   )
 }

@@ -1,0 +1,51 @@
+.lineOrder {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04), 0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  background: #1C1C21;
+}
+
+.orderInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ingridientsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingridients {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-left: 16px;
+}
+
+.price {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+  max-width: 208px;
+}
+
+.done {
+  color: #00CCCC;
+}
+
+.created {
+  color: inherit;
+}
+
+.await {
+  color: inherit;
+}
+
+.canceled {
+  color: #E52B1A;
+}
