@@ -8,6 +8,7 @@ import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Update, Er
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { checkAuth } from '../../services/actions/authentication';
 import { selectorAuthentification, selectorBurgerIngridients } from '../../services/selectors';
+import { OrderInfo } from '../order-info/order-info';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,8 @@ export default function App() {
                 <Route path='/profile' element={<ProtectedRoute element={<Account />} />} >
                   <Route path='' element={<ProtectedRoute element={<Update />} />} />
                   <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
+                  {/* {location.state?.orderPage && <Route path='orders/034534' element={<OrderInfo ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal}/>} />} */}
+                  <Route path='orders/034534' element={<ProtectedRoute element={<OrderInfo ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} />} />}></Route>
                 </Route>
                 <Route path='/feed' element={<Feed />} />
                 <Route path='ingridients/:id' element={<Ingridient />} />

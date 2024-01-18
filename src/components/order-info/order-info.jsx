@@ -1,18 +1,25 @@
-export const orderInfo = ({orderStatus}) => {
+import styles from './order-info.module.css';
+import { Line } from '../line/line';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+
+export const OrderInfo = ({ingridients, orderStatus}) => {
   const orderNumber = '034534';
   const orderData = 'Сегодня, 13:20 i-GMT+3';
   const orderName = 'Test';
   const orderPrice = ingridients.reduce((totalPrice, {price}) => {return totalPrice + price}, 0);
+  const orderCompound = 'Состав:';
 
   return (
     <div className={styles.orderInfo}>
-      <p className={styles.orderNumber}>#{orderNumber}</p>
-      <p className={styles.orderName}>{orderName}</p>
-      <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>
-      <p className={styles.orderCharacteristics}>{orderCharacteristics}</p>
-      <Line></Line>
+      <p className={`text text_type_digits-default ${styles.orderNumber}`}>#{orderNumber}</p>
+      <div className={styles.orderOverview}>
+        <p className="text text_type_main-medium">{orderName}</p>
+        <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>
+      </div>
+      <p className={`text text_type_main-medium ${styles.orderCompound}`}>{orderCompound}</p>
+      <Line type={'orderInfo'}></Line>
       <div className={styles.dataContainer}>
-        <p className={styles.orderData}>{orderData}</p>
+        <p className={`text text_type_main-default text_color_inactive ${styles.orderData}`}>{orderData}</p>
         <div className={styles.price}>
           <p className='text text_type_digits-default'>{orderPrice}</p>
           <CurrencyIcon type="primary" />
