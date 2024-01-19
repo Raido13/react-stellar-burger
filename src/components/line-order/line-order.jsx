@@ -16,7 +16,7 @@ export const LineOrder = ({ingridients, orderStatus}) => {
 
   return (
     <li>
-      <Link className={styles.lineOrder} to={`${orderNumber}`} state={{orderPage: location}}>
+      <Link className={styles.lineOrder} to={orderNumber} state={{orderPreview: location}}>
         <div className={styles.orderInfo}>
           <p className='text text_type_digits-default'>#{orderNumber}</p>
           <p className="text text_type_main-default text_color_inactive">{orderData}</p>

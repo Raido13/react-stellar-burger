@@ -82,3 +82,8 @@ export const postUpdate = ({name, email, password}) => {
 export const getUser = () => {
   return awaitRequest('auth/user', {method: 'GET', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}})
 }
+
+// export const getOrderNumber = (ids) => {
+//   return awaitRequest('orders', {method: 'POST', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
+//             .then(res => res.order);
+// }

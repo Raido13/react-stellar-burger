@@ -12,7 +12,7 @@ export const Ingridient = ({navCloseModal}) => {
       {location.state?.ingridientPage
           ? <Modal navCloseModal={navCloseModal}><IngridientDetails /></Modal>
           : <div className={styles.ingridient}>
-              <IngridientDetails />
+              <IngridientDetails updateTitle={'YES'} />
             </div>
       }
     </>

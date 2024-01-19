@@ -1,8 +1,8 @@
 import styles from './orders-lifetime.module.css';
 
 export const OrdersLifetime = () => {
-  const done = ['034534', '034534', '034534', '034534', '034534'];
-  const inProgress = ['034534', '034534', '034534', '034534', '034534'];
+  const done = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
+  const inProgress = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
   const lifetime = '550 777';
   const today = '555';
 
@@ -11,17 +11,18 @@ export const OrdersLifetime = () => {
       <div className={styles.statesContainer}>
         <div className={styles.stateContainer}>
           <p className='text text_type_main-medium'>Готовы:</p>
+
           <ul className={styles.orders}>
-            {done.map(number => {
-              return <li><p className={`${styles.done} text text_type_digits-default`}>{number}</p></li>
+            {done.map((number, idx) => {
+              return idx < 10 && <li key={idx}><p className={`${styles.done} text text_type_digits-default`}>{number}</p></li>
             })}
           </ul>
         </div>
         <div className={styles.stateContainer}>
           <p className='text text_type_main-medium'>В работе:</p>
           <ul className={styles.orders}>
-            {inProgress.map(number => {
-              return <li><p className='text text_type_digits-default'>{number}</p></li>
+            {inProgress.map((number, idx) => {
+              return idx < 10 && <li key={idx}><p className='text text_type_digits-default'>{number}</p></li>
             })}
           </ul>
         </div>

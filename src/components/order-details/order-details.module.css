@@ -1,7 +1,6 @@
 .orderDetails {
-  padding: 120px 100px;
+  padding: 70px 60px 60px;
   box-sizing: border-box;
-  width: 720px;
   display: grid;
   grid-template-rows: auto 32px auto 60px auto 60px auto 8px auto;
   justify-items: center;

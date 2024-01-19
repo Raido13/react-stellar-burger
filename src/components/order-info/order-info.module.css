@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.orderNumber2 {
+  grid-row: 1;
+}
+
 .orderOverview {
   grid-row: 3;
   display: flex;

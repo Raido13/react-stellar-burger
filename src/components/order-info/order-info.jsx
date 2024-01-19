@@ -2,7 +2,7 @@ import styles from './order-info.module.css';
 import { Line } from '../line/line';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const OrderInfo = ({ingridients, orderStatus}) => {
+export const OrderInfo = ({ingridients, orderStatus, updateTitle}) => {
   const orderNumber = '034534';
   const orderData = 'Сегодня, 13:20 i-GMT+3';
   const orderName = 'Test';
@@ -11,7 +11,7 @@ export const OrderInfo = ({ingridients, orderStatus}) => {
 
   return (
     <div className={styles.orderInfo}>
-      <p className={`text text_type_digits-default ${styles.orderNumber}`}>#{orderNumber}</p>
+      <p className={`text text_type_digits-default ${updateTitle ? styles.orderNumber2 : styles.orderNumber}`}>#{orderNumber}</p>
       <div className={styles.orderOverview}>
         <p className="text text_type_main-medium">{orderName}</p>
         <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>
