@@ -1,30 +1,36 @@
 import styles from './orders-lifetime.module.css';
 
 export const OrdersLifetime = () => {
-  const done = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
-  const inProgress = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
+  const done = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
+  const inProgress = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
   const lifetime = '550 777';
   const today = '555';
+
+  const columnsDone = `,`.repeat(Math.ceil(done.length / 10)).slice(0, -1).split(',').map((it, idx) => it = done.slice(+`${idx}0`, +`${idx + 1}0`));
+  const columnsInProgress = `,`.repeat(Math.ceil(inProgress.length / 10)).slice(0, -1).split(',').map((it, idx) => it = inProgress.slice(+`${idx}0`, +`${idx}9`));
 
   return (
     <div className={styles.ordersLifetime}>
       <div className={styles.statesContainer}>
         <div className={styles.stateContainer}>
           <p className='text text_type_main-medium'>Готовы:</p>
-
-          <ul className={styles.orders}>
-            {done.map((number, idx) => {
-              return idx < 10 && <li key={idx}><p className={`${styles.done} text text_type_digits-default`}>{number}</p></li>
-            })}
-          </ul>
+          {columnsDone.map((it, idx) => {
+            return <ul key={idx} className={styles.orders}>
+              {it.map((number, idx) => {
+                return idx < 10 && <li key={idx}><p className={`${styles.done} text text_type_digits-default`}>{number}</p></li>
+              })}
+            </ul>
+          })}
         </div>
         <div className={styles.stateContainer}>
           <p className='text text_type_main-medium'>В работе:</p>
-          <ul className={styles.orders}>
-            {inProgress.map((number, idx) => {
-              return idx < 10 && <li key={idx}><p className='text text_type_digits-default'>{number}</p></li>
-            })}
-          </ul>
+          {columnsInProgress.map((it, idx) => {
+            return <ul key={idx} className={styles.orders}>
+              {it.map((number, idx) => {
+                return idx < 10 && <li key={idx}><p className={`text text_type_digits-default`}>{number}</p></li>
+              })}
+            </ul>
+          })}
         </div>
       </div>
       <div className={styles.lifetime}>
