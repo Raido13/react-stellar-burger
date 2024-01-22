@@ -3,7 +3,7 @@ import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-comp
 import ConstructorIngridients from '../constructor-ingridients/constructor-ingridients';
 import { useDispatch, useSelector } from 'react-redux';
 import {OPEN_MODAL} from '../../services/actions/event-handler';
-import {getOrderNumberID} from '../../services/actions/order-details';
+import {getOrderNumber} from '../../services/actions/order-details';
 import { GET_COUNTER, SET_EMPTY_CART, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
 import { useNavigate } from 'react-router-dom';
 import { selectorConstructorIngridients } from '../../services/selectors';
@@ -25,7 +25,7 @@ export default function BurgerConstructor() {
       return navigate('/login');
     }
     else {
-      dispatch(getOrderNumberID(summary()));
+      dispatch(getOrderNumber(summary()));
       dispatch({type: OPEN_MODAL});
       dispatch({type: SET_EMPTY_CART});
       dispatch({type: SET_TOTAL_PRICE});

@@ -1,4 +1,6 @@
 const baseUrl = 'https://norma.nomoreparties.space/api/';
+export const wsUrlCommon = 'wss://norma.nomoreparties.space/orders/all';
+export const wsUrlProfile = 'wss://norma.nomoreparties.space/orders';
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 const checkResponse = (res) => {
@@ -25,8 +27,13 @@ export const getIngridients = () => {
             .then(res => res.data)
 }
 
-export const getOrderNumber = (ids) => {
-  return request('orders', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'ingredients': ids, 'token': localStorage.getItem('refreshToken')})})
+export const requestOrderNumber = (ids) => {
+  return awaitRequest('orders', {method: 'POST', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
+            .then(res => res.order);
+}
+
+export const requestOrderInfo = (number) => {
+  return awaitRequest(`orders/${number}`, {method: 'GET', headers: defaultHeaders})
             .then(res => res.order);
 }
 
@@ -55,6 +62,17 @@ export const awaitRequest = async (endpoint, options) => {
   }
 }
 
+export const wsAwaitRequest = async () => {
+  const refresh = await refreshToken();
+  if(!refreshToken.success) {
+    return Promise.reject(refresh)
+  }
+  localStorage.setItem('refreshToken', refresh.refreshToken);
+  localStorage.setItem('accessToken', refresh.accessToken);
+
+  return (`${wsUrlCommon}?token${refresh.accessToken.split(' ')[1]}`);
+} 
+
 export const postSignUp = ({email, password, name}) => {
   return request('auth/register', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'name': name, 'email': email, 'password': password})})
 }
@@ -82,8 +100,3 @@ export const postUpdate = ({name, email, password}) => {
 export const getUser = () => {
   return awaitRequest('auth/user', {method: 'GET', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}})
 }
-
-// export const getOrderNumber = (ids) => {
-//   return awaitRequest('orders', {method: 'POST', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
-//             .then(res => res.order);
-// }

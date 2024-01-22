@@ -1,13 +1,13 @@
 import styles from './orders-lifetime.module.css';
 
 export const OrdersLifetime = () => {
-  const done = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
-  const inProgress = ['034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534'];
+  const done = ['1', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '11'];
+  const inProgress = ['1', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '034534', '0'];
   const lifetime = '550 777';
   const today = '555';
 
   const columnsDone = `,`.repeat(Math.ceil(done.length / 10)).slice(0, -1).split(',').map((it, idx) => it = done.slice(+`${idx}0`, +`${idx + 1}0`));
-  const columnsInProgress = `,`.repeat(Math.ceil(inProgress.length / 10)).slice(0, -1).split(',').map((it, idx) => it = inProgress.slice(+`${idx}0`, +`${idx}9`));
+  const columnsInProgress = `,`.repeat(Math.ceil(inProgress.length / 10)).slice(0, -1).split(',').map((it, idx) => it = inProgress.slice(+`${idx}0`, +`${idx + 1}0`));
 
   return (
     <div className={styles.ordersLifetime}>

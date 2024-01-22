@@ -1,29 +1,43 @@
 import { IngridientMini } from '../ingridient-mini/ingridient-mini';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './line-order.module.css';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { selectorBurgerIngridients } from '../../services/selectors';
 
-export const LineOrder = ({ingridients, orderStatus}) => {
-  // const {orderNumber, orderData, orderName, ingridients} = order;
+export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt: orderData, number: orderNumber}) => {
   const location = useLocation();
-  const orderNumber = '034534';
-  const orderData = 'Сегодня, 13:20 i-GMT+3';
+  const {burgerIngridients} = useSelector(selectorBurgerIngridients);
+  const ingridients = (() => {
+    return burgerIngridients.filter(({_id}) => ingridientsIDs.indexOf({_id}));
+  }, [burgerIngridients, ingridientsIDs]);
+  
   const orderName = 'Test';
   const orderPrice = ingridients.reduce((totalPrice, {price}) => {return totalPrice + price}, 0);
   const overSize = ingridients.length > 5 ? ingridients.length - 5 : undefined;
   const maxSize = 5;
+  console.log(ingridients, status, orderData)
+  const orderStatus = useMemo(() => {
+    switch(status) {
+      case 'created': return 'Создан';
+      case 'pending': return 'Готовится';
+      case 'done': return 'Выполнен';
+      default: return 'Статус заказа неизвествен';
+    }
+  }, [status])
 
   return (
     <li>
       <Link className={styles.lineOrder} to={orderNumber} state={{orderPreview: location}}>
         <div className={styles.orderInfo}>
           <p className='text text_type_digits-default'>#{orderNumber}</p>
-          <p className="text text_type_main-default text_color_inactive">{orderData}</p>
+          <FormattedDate className="text text_type_main-default text_color_inactive" date={new Date(orderData)} />
         </div>
         <div className={styles.orderOverview}>
           <p className="text text_type_main-medium">{orderName}</p>
-          {orderStatus !== undefined && <p className={`text text_type_main-default ${styles[`${orderStatus}`]}`}>{orderStatus}</p>}
+          {status !== undefined && <p className={`text text_type_main-default ${styles[`${status}`]}`}>{orderStatus}</p>}
         </div>
         <div className={styles.ingridientsContainer}>
           <ul className={styles.ingridients}>

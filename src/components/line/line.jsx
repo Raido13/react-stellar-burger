@@ -5,15 +5,15 @@ import { LineOrder } from '../line-order/line-order';
 import { LineIngridient } from '../line-ingridient/line-ingridient';
 
 
-export const Line = ({type}) => {
+export const Line = ({type, orders}) => {
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
-  const orders = [burgerIngridients];
+  console.log(orders);
   switch(type) {
     case 'lineOrder': 
       return (
         <ul className={`${styles.line} ${styles[type]} custom-scroll`}>
-          {orders.map((ingridients, id) => {
-            return <LineOrder key={id} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} ingridients={ingridients} />
+          {orders.map((order, id) => {
+            return <LineOrder key={id} order={order} />
           })}
         </ul>
       )
