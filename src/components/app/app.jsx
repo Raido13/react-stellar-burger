@@ -9,6 +9,8 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { checkAuth } from '../../services/actions/authentication';
 import { selectorAuthentification, selectorBurgerIngridients } from '../../services/selectors';
 import { OrderPreview } from '../order-preview/order-preview';
+import { FeedPreview } from '../feed-preview/feed-preview';
+import { OrderDisplay } from '../order-display/order-display';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -43,15 +45,16 @@ export default function App() {
                 <Route path='/reset-password' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
                 <Route path='/profile' element={<ProtectedRoute element={<Account />} />} >
                   <Route path='' element={<ProtectedRoute element={<Update />} />} />
-                  <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
-                  {location.state?.orderPreview && <Route path='orders/034534' element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal}/>} />}
+                  <Route path='orders' element={<ProtectedRoute element={<Orders />} />}>
+                    {location.state?.preview && <Route path=':orderNumber' element={<ProtectedRoute element={<OrderPreview navCloseModal={navCloseModal}/>} />} />}
+                  </Route>
                 </Route>
                 <Route path='feed' element={<Feed />}>
-                  {location.state?.orderPreview && <Route path=':orderNumber' element={<OrderPreview navCloseModal={navCloseModal} />} />}
+                  {location.state?.preview && <Route path=':orderNumber' element={<FeedPreview navCloseModal={navCloseModal} />} />}
                 </Route>
                 <Route path='ingridients/:id' element={<Ingridient />} />
-                <Route path='profile/orders/034534' element={<ProtectedRoute element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal} />} />} />
-                <Route path='feed/:orderNumber' element={<OrderPreview />} />
+                <Route path='profile/orders/:orderNumber' element={<ProtectedRoute element={<OrderDisplay navCloseModal={navCloseModal} />} />} />
+                <Route path='feed/:orderNumber' element={<OrderDisplay />} />
                 <Route path='*' element={<Err404 />} />
               </Routes>
             }

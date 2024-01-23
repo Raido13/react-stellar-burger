@@ -11,7 +11,7 @@ const initialState = {
   orderNumberRequest: false,
   orderNumberError: false,
   orderNumber: null,
-  orderInfo: {},
+  orders: [],
   orderInfoRequest: false,
   orderInfoError: false
 }
@@ -28,13 +28,13 @@ export const orderDetailsReducer = (state = initialState, action) => {
       return {...state, orderNumberError: true, orderNumberRequest: false, orderNumber: 'Не удалось получить номер заказа'}
     }
     case REQUEST_ORDER_INFO: {
-      return {...state, orderInfo: {}, orderInfoRequest: true}
+      return {...state, orders: [], orderInfoError: false, orderInfoRequest: true}
     }
     case REQUEST_ORDER_INFO_SUCCESS: {
-      return {...state, orderInfoError: false, orderInfoRequest: false, orderInfo: action.orderInfo}
+      return {...state, orderInfoError: false, orderInfoRequest: false, orders: action.orders}
     }
     case REQUEST_ORDER_INFO_FAILED: {
-      return {...state, orderInfoError: true, orderInfoRequest: false, orderInfo: {}}
+      return {...state, orderInfoError: true, orderInfoRequest: false, orders: []}
     }
     default: return state;
   }

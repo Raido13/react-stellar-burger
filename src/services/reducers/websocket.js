@@ -30,13 +30,13 @@ export const websocketReducer = (state = initialState, action) => {
       return {...state, wsConnectCommon: false, commonOrders: [], totalOrders: null, totalToday: null}
     }
     case WS_CONNECTION_SUCCESS_PROFILE: {
-      return {...state, wsConnectCommon: true}
+      return {...state, wsConnectProfile: true}
     }
     case WS_CONNECTION_ERROR_PROFILE: {
-      return {...state, wsConnectCommon: false}
+      return {...state, wsConnectProfile: false}
     }
     case WS_CONNECTION_CLOSED_PROFILE: {
-      return {...state, wsConnectCommon: false, profileOrders: []}
+      return {...state, wsConnectProfile: false, profileOrders: []}
     }
     case WS_GET_COMMON_ORDERS: {
       return {...state, commonOrders: action.payload.orders, totalOrders: action.payload.total, totalToday: action.payload.totalToday}

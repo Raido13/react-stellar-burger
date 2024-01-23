@@ -7,12 +7,12 @@ export const REQUEST_ORDER_INFO = 'REQUEST_ORDER_INFO';
 export const REQUEST_ORDER_INFO_SUCCESS = 'REQUEST_ORDER_INFO_SUCCESS';
 export const REQUEST_ORDER_INFO_FAILED = 'REQUEST_ORDER_INFO_FAILED';
 
-export const getOrderNumber = (Ids) => {
+export const getOrderNumber = (ids) => {
   return function(dispatch) {
     dispatch({
       type: REQUEST_ORDER_NUMBER
     })
-    requestOrderNumber(Ids)
+    requestOrderNumber(ids)
       .then(res => {
         dispatch({
           type: REQUEST_ORDER_NUMBER_SUCCESS,
@@ -36,7 +36,7 @@ export const getOrderInfo = (number) => {
       .then(res => {
         dispatch({
           type: REQUEST_ORDER_INFO_SUCCESS,
-          orderInfo: res.orders[0]
+          orders: res
         })
       })
       .catch(() => {

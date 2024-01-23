@@ -9,19 +9,16 @@ export const socketMiddleware = (actions) => {
       const {dispatch} = store;
       const {type, payload} = action;
       const {wsInit, wsClose, onOpen, onError, onGetOrders, onClose} = actions;
-
-      // if(socket && type === wsClose) {
-      //   console.log('test');
-      //   isConnected = false;
-      //   socket.close();
-      // }
-
+      
       if(type === wsInit) {
         socket = new WebSocket(payload);
         isConnected = true;
       }
 
-      console.log(type, payload)
+      if(socket && type === wsClose) {
+        isConnected = false;
+        socket.close();
+      }
       
       if(socket) {
         socket.onopen = event => {

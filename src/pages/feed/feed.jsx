@@ -26,8 +26,12 @@ export const Feed = () => {
     <div className={styles.feed}>
       <Title text={'Лента заказов'} />
       <div className={styles.container}>
-        <Line orders={commonOrders} type={'lineFeed'} />
-        <OrdersLifetime orders={commonOrders} totalOrders={totalOrders} totalToday={totalToday} />
+          {wsConnectCommon && commonOrders.length !== 0 &&
+            <>
+              <Line orders={commonOrders} type={'lineFeed'} />
+              <OrdersLifetime orders={commonOrders} totalOrders={totalOrders} totalToday={totalToday} />
+            </>
+          }
         <Outlet />
       </div>
     </div>

@@ -28,13 +28,13 @@ export const getIngridients = () => {
 }
 
 export const requestOrderNumber = (ids) => {
-  return awaitRequest('orders', {method: 'POST', headers: {defaultHeaders, authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
+  return awaitRequest('orders', {method: 'POST', headers: {'Content-Type': 'application/json', authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
             .then(res => res.order);
 }
 
 export const requestOrderInfo = (number) => {
-  return awaitRequest(`orders/${number}`, {method: 'GET', headers: defaultHeaders})
-            .then(res => res.order);
+  return request(`orders/${number}`, {method: 'GET', headers: defaultHeaders})
+            .then(res => res.orders);
 }
 
 export const refreshToken = () => {
@@ -53,9 +53,13 @@ export const awaitRequest = async (endpoint, options) => {
       }
       localStorage.setItem('refreshToken', refresh.refreshToken);
       localStorage.setItem('accessToken', refresh.accessToken);
+
       options.headers.authorization = refresh.accessToken;
+
       const res = await fetch(`${baseUrl}${endpoint}`, options);
+
       return await checkResponse(res);
+      
     } else {
       return Promise.reject(err);
     }
@@ -70,7 +74,7 @@ export const wsAwaitRequest = async () => {
   localStorage.setItem('refreshToken', refresh.refreshToken);
   localStorage.setItem('accessToken', refresh.accessToken);
 
-  return (`${wsUrlProfile}?token${refresh.accessToken.split(' ')[1]}`);
+  return (`${wsUrlProfile}?token=${refresh.accessToken.split(' ')[1]}`);
 } 
 
 export const postSignUp = ({email, password, name}) => {

@@ -34,11 +34,11 @@ export const OrdersLifetime = ({orders, totalOrders, totalToday}) => {
       </div>
       <div className={styles.lifetime}>
         <p className={`text text_type_main-medium`}>Выполнено за все время:</p>
-        <p className={`text text_type_digits-large ${styles.digits}`}>{totalOrders}</p>
+        <p className={`text text_type_digits-large ${styles.digits}`}>{totalOrders.toLocaleString('FI-fi')}</p>
       </div>
       <div className={styles.today}>
         <p className={`text text_type_main-medium`}>Выполнено за сегодня:</p>
-        <p className={`text text_type_digits-large ${styles.digits}`}>{totalToday}</p>
+        <p className={`text text_type_digits-large ${styles.digits}`}>{totalToday.toLocaleString('FI-fi')}</p>
       </div>
     </div>
   )

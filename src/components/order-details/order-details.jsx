@@ -4,10 +4,10 @@ import styles from './order-details.module.css';
 import { selectorOrderDetails } from '../../services/selectors';
 
 export default function OrderDetails() {
-  const {number} = useSelector(selectorOrderDetails)
+  const {orderNumber: number} = useSelector(selectorOrderDetails)
   return (
     <div className={styles.orderDetails}>
-      <h3 className={`${styles.price} text text_type_digits-large`}>{number}</h3>
+      {number && <h3 className={`${styles.price} text text_type_digits-large`}>{number}</h3>}
       <p className={`${styles.id} text text_type_main-medium`}>идентификатор заказа</p>
       <img className={styles.blot} src={blot} alt="заказ подтверждён" />
       <p className={`${styles.prepare} text text_type_main-default`}>Ваш заказ начали готовить</p>

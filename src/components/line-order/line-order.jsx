@@ -27,7 +27,7 @@ export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt, numbe
 
   return (
     <li>
-      <Link className={styles.lineOrder} to={`${orderNumber}`} state={{orderPreview: location}}>
+      <Link className={styles.lineOrder} to={`${orderNumber}`} state={{preview: location}}>
         <div className={styles.orderInfo}>
           <p className='text text_type_digits-default'>#{orderNumber}</p>
           <FormattedDate className="text text_type_main-default text_color_inactive" date={orderDate} />
