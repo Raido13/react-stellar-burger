@@ -36,18 +36,18 @@
   max-width: 208px;
 }
 
-.done {
-  color: #00CCCC;
-}
-
 .created {
   color: inherit;
 }
 
-.await {
+.pending {
   color: inherit;
 }
 
-.canceled {
-  color: #E52B1A;
+.done {
+  color: #00CCCC;
 }
+
+/* .canceled {
+  color: #E52B1A;
+} */

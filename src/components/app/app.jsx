@@ -47,11 +47,11 @@ export default function App() {
                   {location.state?.orderPreview && <Route path='orders/034534' element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal}/>} />}
                 </Route>
                 <Route path='feed' element={<Feed />}>
-                  {location.state?.orderPreview && <Route path='034534' element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal} />} />}
+                  {location.state?.orderPreview && <Route path=':orderNumber' element={<OrderPreview navCloseModal={navCloseModal} />} />}
                 </Route>
                 <Route path='ingridients/:id' element={<Ingridient />} />
                 <Route path='profile/orders/034534' element={<ProtectedRoute element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} navCloseModal={navCloseModal} />} />} />
-                <Route path='feed/034534' element={<ProtectedRoute element={<OrderPreview ingridients={burgerIngridients} orderStatus={['done', 'await', 'created', 'canceled'][Math.floor(Math.random() * 4)]} />} />} />
+                <Route path='feed/:orderNumber' element={<OrderPreview />} />
                 <Route path='*' element={<Err404 />} />
               </Routes>
             }

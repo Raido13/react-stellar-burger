@@ -7,18 +7,15 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectorBurgerIngridients } from '../../services/selectors';
 
-export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt: orderData, number: orderNumber}) => {
+export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt, number: orderNumber, name: orderName}) => {
   const location = useLocation();
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
-  const ingridients = (() => {
-    return burgerIngridients.filter(({_id}) => ingridientsIDs.indexOf({_id}));
-  }, [burgerIngridients, ingridientsIDs]);
-  
-  const orderName = 'Test';
+  const ingridients = ingridientsIDs.map(id => burgerIngridients.find(({_id}) => id === _id));
+  const orderDate = new Date(createdAt);
   const orderPrice = ingridients.reduce((totalPrice, {price}) => {return totalPrice + price}, 0);
   const overSize = ingridients.length > 5 ? ingridients.length - 5 : undefined;
   const maxSize = 5;
-  console.log(ingridients, status, orderData)
+
   const orderStatus = useMemo(() => {
     switch(status) {
       case 'created': return 'Создан';
@@ -30,10 +27,10 @@ export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt: order
 
   return (
     <li>
-      <Link className={styles.lineOrder} to={orderNumber} state={{orderPreview: location}}>
+      <Link className={styles.lineOrder} to={`${orderNumber}`} state={{orderPreview: location}}>
         <div className={styles.orderInfo}>
           <p className='text text_type_digits-default'>#{orderNumber}</p>
-          <FormattedDate className="text text_type_main-default text_color_inactive" date={new Date(orderData)} />
+          <FormattedDate className="text text_type_main-default text_color_inactive" date={orderDate} />
         </div>
         <div className={styles.orderOverview}>
           <p className="text text_type_main-medium">{orderName}</p>

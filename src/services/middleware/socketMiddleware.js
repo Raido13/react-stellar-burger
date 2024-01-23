@@ -10,13 +10,20 @@ export const socketMiddleware = (actions) => {
       const {type, payload} = action;
       const {wsInit, wsClose, onOpen, onError, onGetOrders, onClose} = actions;
 
+      // if(socket && type === wsClose) {
+      //   console.log('test');
+      //   isConnected = false;
+      //   socket.close();
+      // }
+
       if(type === wsInit) {
         socket = new WebSocket(payload);
         isConnected = true;
       }
 
+      console.log(type, payload)
+      
       if(socket) {
-        console.log(type)
         socket.onopen = event => {
           dispatch({type: onOpen, payload: event})
         }
@@ -36,7 +43,7 @@ export const socketMiddleware = (actions) => {
           dispatch({type: onGetOrders, payload: {orders, total, totalToday}});
         }
 
-        socket.onClose = event => {          
+        socket.onclose = event => {          
           dispatch({type: onClose, payload: event});
 
           if(isConnected) {
@@ -46,11 +53,6 @@ export const socketMiddleware = (actions) => {
           }
         }
       }
-
-      // if(wsClose && type === wsClose && socket) {
-      //   isConnected = false;
-      //   socket.close();
-      // }
 
       next(action);
     }

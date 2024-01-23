@@ -42,7 +42,7 @@ export const websocketReducer = (state = initialState, action) => {
       return {...state, commonOrders: action.payload.orders, totalOrders: action.payload.total, totalToday: action.payload.totalToday}
     }
     case WS_GET_PROFILE_ORDERS: {
-      return {...state, userOrders: action.payload.orders}
+      return {...state, profileOrders: action.payload.orders}
     }
     default: return state;
   }
