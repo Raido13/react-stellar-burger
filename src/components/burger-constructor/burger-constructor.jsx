@@ -11,7 +11,7 @@ import { selectorConstructorIngridients } from '../../services/selectors';
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const {bun, ingridients, totalPrice} = useSelector(selectorConstructorIngridients);
-  const {auth} = useSelector(store => store.authentication);
+  const {auth, user} = useSelector(store => store.authentication);
   const navigate = useNavigate();
   const summary = () => {
     return [bun._id, ...ingridients.map(ingridient => ingridient._id), bun._id]
@@ -21,9 +21,11 @@ export default function BurgerConstructor() {
     if(!bun || !ingridients.length) {
       return;
     }
-    if(!auth) {
+
+    if(!auth || user === null) {
       return navigate('/login');
     }
+    
     else {
       dispatch(getOrderNumber(summary()));
       dispatch({type: OPEN_MODAL});

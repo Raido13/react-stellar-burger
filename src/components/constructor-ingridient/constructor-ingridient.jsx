@@ -12,7 +12,7 @@ export default function ConstructorIngridient({ingridient, id}) {
   const ref = useRef();
   const dispatch = useDispatch();
   const { name, price, image, type } = ingridient;
-  const ingridients = useSelector(selectorConstructorIngridients);
+  const {ingridients} = useSelector(selectorConstructorIngridients);
 
   const moveIngridient = useCallback((dragId, hoverId) => {
     ingridients.splice(hoverId, 0, ...ingridients.splice(dragId, 1));

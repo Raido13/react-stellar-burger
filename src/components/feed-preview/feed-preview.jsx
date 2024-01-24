@@ -8,8 +8,9 @@ import { selectorWebsocket } from '../../services/selectors';
 export const FeedPreview = ({navCloseModal}) => {
   const {orderNumber} = useParams();
   const {commonOrders} = useSelector(selectorWebsocket);
+  const order = commonOrders.find(({number}) => number === +orderNumber);
 
   return (
-    <Modal navCloseModal={navCloseModal}><OrderInfo orderNumber={orderNumber} orders={commonOrders} updateTitle={'YES'} /></Modal>
+    <Modal navCloseModal={navCloseModal}><OrderInfo orderNumber={orderNumber} order={order} updateTitle={'YES'} /></Modal>
   )
 }

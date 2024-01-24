@@ -2,15 +2,14 @@ import styles from './line.module.css';
 import { LineOrder } from '../line-order/line-order';
 import { LineIngridient } from '../line-ingridient/line-ingridient';
 
-
 export const Line = ({type, orders, ingridients}) => {
   switch(type) {
     case 'lineOrder': 
       return (
         <ul className={`${styles.line} ${styles[type]} custom-scroll`}>
           {orders.map((order, id) => {
-            return (<LineOrder key={id} {...order} />)
-          })}
+            return (<LineOrder key={id} {...order} showStatus={true} />)
+          }).reverse()}
         </ul>
       )
     case 'orderInfo': 

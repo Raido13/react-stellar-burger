@@ -15,6 +15,8 @@ export const socketMiddleware = (actions) => {
         isConnected = true;
       }
 
+      console.log(action);
+
       if(socket && type === wsClose) {
         isConnected = false;
         socket.close();

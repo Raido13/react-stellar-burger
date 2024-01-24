@@ -22,6 +22,20 @@
   row-gap: 8px;
 }
 
+.name {
+  max-width: 792px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feedName {
+  max-width: 532px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .ingridientsContainer {
   display: flex;
   justify-content: space-between;

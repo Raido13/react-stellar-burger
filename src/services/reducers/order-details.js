@@ -19,7 +19,7 @@ const initialState = {
 export const orderDetailsReducer = (state = initialState, action) => {
   switch(action.type) {
     case REQUEST_ORDER_NUMBER: {
-      return {...state, orderNumberRequest: true}
+      return {...state, orderNumberRequest: true, orderNumber: null}
     }
     case REQUEST_ORDER_NUMBER_SUCCESS: {
       return {...state, orderNumberError: false, orderNumberRequest: false, orderNumber: action.order.number}

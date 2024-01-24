@@ -16,7 +16,10 @@ export default function Modal({children, navCloseModal}) {
   }
 
   const closeByEscape = e => {
-    e.key === 'Escape' && navCloseModal !== undefined ? navCloseModal() : closeModal();
+    if(e.key === 'Escape') {
+      return navCloseModal !== undefined ? navCloseModal() : closeModal();
+    }
+    return null;
   }
 
   useEffect(() => {

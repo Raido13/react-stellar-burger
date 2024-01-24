@@ -10,6 +10,8 @@ export const WS_CONNECTION_ERROR_PROFILE = 'WS_CONNECTION_ERROR_PROFILE';
 export const WS_CONNECTION_CLOSED_PROFILE = 'WS_CONNECTION_CLOSED_PROFILE';
 export const WS_GET_COMMON_ORDERS = 'WS_GET_COMMON_ORDERS';
 export const WS_GET_PROFILE_ORDERS = 'WS_GET_PROFILE_ORDERS';
+export const FIND_ORDER = 'FIND_ORDER';
+export const FIND_ORDER_CLEAR = 'FIND_ORDER_CLEAR';
 
 export const wsConnectionStartCommon = (wsUrlCommon) => {
   return {
@@ -25,7 +27,6 @@ export const wsConnectionCloseCommon = () => {
 }
 
 export const wsConnectionStartProfile = (wsUrlProfile) => {
-  console.log(wsUrlProfile)
   return {
     type: WS_CONNECTION_START_PROFILE,
     payload: wsUrlProfile
