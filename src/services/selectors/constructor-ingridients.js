@@ -1,0 +1,1 @@
+export const selectorConstructorIngridients = store => store.constructorIngridients;

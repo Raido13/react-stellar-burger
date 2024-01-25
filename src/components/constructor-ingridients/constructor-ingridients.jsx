@@ -5,10 +5,11 @@ import bunThumbnail from '@ya.praktikum/react-developer-burger-ui-components/dis
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ADD_INGRIDIENT_TO_CART, GET_COUNTER, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
+import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function ConstructorIngridients() {
   const dispatch = useDispatch();
-  const bun = useSelector(store => store.constructorIngridients.bun);
+  const {bun} = useSelector(selectorConstructorIngridients);
   const [{isHover}, dropTarget] = useDrop({
     accept: 'ingridients',
     collect: monitor => ({

@@ -1,14 +1,18 @@
 import styles from './burger-constructor.module.css';
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-import ConstructorIngridients from '../constructor-ingridients/constructor-ingridietns';
+import ConstructorIngridients from '../constructor-ingridients/constructor-ingridients';
 import { useDispatch, useSelector } from 'react-redux';
 import {OPEN_MODAL} from '../../services/actions/event-handler';
-import {getOrderNumberID} from '../../services/actions/order-details';
+import {getOrderNumber} from '../../services/actions/order-details';
 import { GET_COUNTER, SET_EMPTY_CART, SET_TOTAL_PRICE } from '../../services/actions/constructor-ingridients';
+import { useNavigate } from 'react-router-dom';
+import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
-  const {bun, ingridients, totalPrice} = useSelector(store => store.constructorIngridients);
+  const {bun, ingridients, totalPrice} = useSelector(selectorConstructorIngridients);
+  const {auth, user} = useSelector(store => store.authentication);
+  const navigate = useNavigate();
   const summary = () => {
     return [bun._id, ...ingridients.map(ingridient => ingridient._id), bun._id]
   }
@@ -17,9 +21,14 @@ export default function BurgerConstructor() {
     if(!bun || !ingridients.length) {
       return;
     }
+
+    if(!auth || user === null) {
+      return navigate('/login');
+    }
+    
     else {
-      dispatch(getOrderNumberID(summary()));
-      dispatch({type: OPEN_MODAL, kind: 'order'});
+      dispatch(getOrderNumber(summary()));
+      dispatch({type: OPEN_MODAL});
       dispatch({type: SET_EMPTY_CART});
       dispatch({type: SET_TOTAL_PRICE});
       dispatch({type: GET_COUNTER, ingridient: null, bun})

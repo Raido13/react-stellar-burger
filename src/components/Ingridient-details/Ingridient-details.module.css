@@ -1,7 +1,4 @@
 .ingridientDetails {
-  padding: 50px 40px 60px;
-  box-sizing: border-box;
-  width: 640px;
   display: grid;
   justify-items: center;
   grid-template-rows: auto auto 16px auto 32px auto;
@@ -12,6 +9,13 @@
   grid-row: 1;
   width: 100%;
   margin: 0;
+}
+
+.title2 {
+  grid-row: 1;
+  width: 100%;
+  margin: 0;
+  text-align: center;
 }
 
 .img {

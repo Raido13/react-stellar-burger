@@ -1,12 +1,17 @@
+import { selectorBurgerIngridients } from '../../services/selectors';
 import styles from './Ingridient-details.module.css';
 import { useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
 
-export default function IngridientDetails() {
-  const {ingridient} = useSelector(store => store.ingridientDetails)
-
+export default function IngridientDetails({updateTitle}) {
+  const {burgerIngridients} = useSelector(selectorBurgerIngridients);
+  const {id} = useParams();
+  
+  const ingridient = burgerIngridients.find(({_id}) => _id === id);
+  
   return (
     <div className={styles.ingridientDetails}>
-      <h3 className={`${styles.title} text text_type_main-large`}>Детали ингридиента</h3>
+      <h3 className={`${!!updateTitle ? styles.title2 : styles.title} text text_type_main-large`}>Детали ингридиента</h3>
       <img className={`${styles.img}`} src={ingridient.image_large} alt={ingridient.name} />
       <p className={`${styles.name} text text_type_main-medium`}>{ingridient.name}</p>
       <ul className={`${styles.list}`}>

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
+  max-width: 480px;
+  margin-top: 180px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  list-style-type: none;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #4C4CFF;
+}

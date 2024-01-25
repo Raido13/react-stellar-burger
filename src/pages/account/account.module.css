@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  column-gap: 60px;
+  margin-top: 44px;
+  width: 1280px;
+  padding: 0 20px; 
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
+  margin-top: 76px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  margin: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.caption {
+  opacity: 0.4;
+  width: 320px;
+}
+
+.active {
+  color: #F2F2F3;
+}
+
+.update {
+  margin-top: 76px;
+}
