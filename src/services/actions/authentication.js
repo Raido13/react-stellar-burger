@@ -14,7 +14,7 @@ export const userSignUp = (form) => {
         dispatch({type: SET_USER, user: res.user});
         dispatch({type: SET_AUTH, auth: true});
       })
-      .catch(dispatch({type: ON_ERROR}))
+      .catch(() => dispatch({type: ON_ERROR}))
   }
 }
 
@@ -27,7 +27,7 @@ export const userSignIn = (form) => {
         dispatch({type: SET_USER, user: res.user});
         dispatch({type: SET_AUTH, auth: true});
       })
-      .catch(dispatch({type: ON_ERROR}))
+      .catch(() => dispatch({type: ON_ERROR}))
   }
 }
 
@@ -37,7 +37,7 @@ export const userUpdate = (form) => {
               .then(res => {
                 dispatch({type: SET_USER, user: res.user});
               })
-              .catch(dispatch({type: ON_ERROR}))
+              .catch(() => dispatch({type: ON_ERROR}))
   }
 }
 
@@ -47,7 +47,7 @@ export const setUser = () => {
               .then(res => {
                 dispatch({type: SET_USER, user: res.user});
               })
-              .catch(dispatch({type: ON_ERROR}))
+              .catch(() => dispatch({type: ON_ERROR}))
   }
 }
 
@@ -59,7 +59,7 @@ export const userLogout = () => {
                 localStorage.removeItem('refreshToken', res.refreshToken);
                 dispatch({type: SET_USER, user: null});
               })
-              .catch(dispatch({type: ON_ERROR}))
+              .catch(() => dispatch({type: ON_ERROR}))
               .finally(() => {
                 dispatch({type: SET_AUTH, auth: false});
               })
