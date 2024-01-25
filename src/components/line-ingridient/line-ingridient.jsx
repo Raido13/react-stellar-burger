@@ -1,9 +1,10 @@
 import styles from './line-ingridient.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {ingredientTypes} from '../../utils/types';
 
 export const LineIngridient = ({ingridient, counter}) => {
-  // const location = useLocation();
   return (
     <li>
       <Link className={styles.lineIngridient} to={`/ingridients/${ingridient._id}`}>
@@ -16,4 +17,9 @@ export const LineIngridient = ({ingridient, counter}) => {
       </Link>
     </li>
   )
+}
+
+LineIngridient.propTypes = {
+  ingridient: ingredientTypes.isRequired,
+  counter: PropTypes.number
 }

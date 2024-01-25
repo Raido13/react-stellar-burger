@@ -6,9 +6,7 @@ import {
   WS_CONNECTION_ERROR_PROFILE,
   WS_CONNECTION_CLOSED_PROFILE,
   WS_GET_COMMON_ORDERS,
-  WS_GET_PROFILE_ORDERS,
-  FIND_ORDER,
-  FIND_ORDER_CLEAR
+  WS_GET_PROFILE_ORDERS
 } from '../actions/websocket';
 
 const initialState = {
@@ -17,9 +15,7 @@ const initialState = {
   totalOrders: null,
   totalToday: null,
   profileOrders: [],
-  commonOrders: [],
-  foundOrder: null,
-  findOrder: false
+  commonOrders: []
 }
 
 export const websocketReducer = (state = initialState, action) => {
@@ -47,12 +43,6 @@ export const websocketReducer = (state = initialState, action) => {
     }
     case WS_GET_PROFILE_ORDERS: {
       return {...state, profileOrders: action.payload.orders}
-    }
-    case FIND_ORDER: {
-      return {...state, findOrder: true, foundOrder: state.commonOrders.some(({number}) => number === +action.number) ? state.commonOrders.find(({number}) => number === +action.number) : null}
-    }
-    case FIND_ORDER_CLEAR: {
-      return {...state, findOrder: false}
     }
     default: return state;
   }

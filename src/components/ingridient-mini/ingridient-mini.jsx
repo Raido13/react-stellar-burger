@@ -1,4 +1,6 @@
+import { ingredientTypes } from '../../utils/types';
 import styles from './ingridient-mini.module.css';
+import PropTypes from 'prop-types';
 
 export const IngridientMini = ({ingridient, id, overSize}) => {
   return (
@@ -7,4 +9,9 @@ export const IngridientMini = ({ingridient, id, overSize}) => {
       {overSize !== undefined && <p className={`text text_type_main-default ${styles.number}`}>+{overSize}</p>}
     </li>
   )
+}
+
+IngridientMini.propTypes = {
+  ingridient: ingredientTypes.isRequired,
+  id: PropTypes.number.isRequired
 }

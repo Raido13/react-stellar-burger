@@ -4,9 +4,9 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { selectorBurgerIngridients } from '../../services/selectors';
+import PropTypes from 'prop-types';
 
 export const OrderInfo = ({updateTitle, order, orderNumber}) => {
-  console.log(order);
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
   const {status, ingredients: ingridientsIDs, name: orderName, createdAt} = order;
   const orderDate = new Date(createdAt);
@@ -41,4 +41,10 @@ export const OrderInfo = ({updateTitle, order, orderNumber}) => {
       </div>
     </div>
   )
+}
+
+OrderInfo.propTypes = {
+  updateTitle: PropTypes.string,
+  orderNumber: PropTypes.string.isRequired,
+  order: PropTypes.object.isRequired
 }

@@ -1,4 +1,5 @@
 import styles from './orders-lifetime.module.css';
+import PropTypes from 'prop-types';
 
 export const OrdersLifetime = ({orders, totalOrders, totalToday}) => {
   const done = [];
@@ -42,4 +43,10 @@ export const OrdersLifetime = ({orders, totalOrders, totalToday}) => {
       </div>
     </div>
   )
+}
+
+OrdersLifetime.propTypes = {
+  totalOrders: PropTypes.number.isRequired,
+  totalToday: PropTypes.number.isRequired,
+  orders: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
 }

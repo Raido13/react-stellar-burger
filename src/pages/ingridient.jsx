@@ -1,4 +1,4 @@
-import IngridientDetails from "../components/Ingridient-details/Ingridient-details";
+import IngridientDetails from "../components/ingridient-details/ingridient-details";
 import styles from './ingridient.module.css';
 import Modal from "../components/modal/modal";
 import PropTypes from 'prop-types';

@@ -10,7 +10,6 @@ import { checkAuth } from '../../services/actions/authentication';
 import { selectorAuthentification, selectorBurgerIngridients } from '../../services/selectors';
 import { OrderPreview } from '../order-preview/order-preview';
 import { FeedPreview } from '../feed-preview/feed-preview';
-import { OrderDisplay } from '../order-display/order-display';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -53,8 +52,8 @@ export default function App() {
                   {location.state?.preview && <Route path=':orderNumber' element={<FeedPreview navCloseModal={navCloseModal} />} />}
                 </Route>
                 <Route path='ingridients/:id' element={<Ingridient />} />
-                <Route path='profile/orders/:orderNumber' element={<ProtectedRoute element={<OrderDisplay navCloseModal={navCloseModal} />} />} />
-                <Route path='feed/:orderNumber' element={<OrderDisplay />} />
+                <Route path='profile/orders/:orderNumber' element={<ProtectedRoute element={<OrderPreview navCloseModal={navCloseModal} />} />} />
+                <Route path='feed/:orderNumber' element={<FeedPreview />} />
                 <Route path='*' element={<Err404 />} />
               </Routes>
             }

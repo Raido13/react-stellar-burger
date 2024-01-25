@@ -1,7 +1,8 @@
 import { selectorBurgerIngridients } from '../../services/selectors';
-import styles from './Ingridient-details.module.css';
+import styles from './ingridient-details.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 export default function IngridientDetails({updateTitle}) {
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
@@ -34,4 +35,8 @@ export default function IngridientDetails({updateTitle}) {
       </ul>
     </div>
   )
+}
+
+IngridientDetails.propTypes = {
+  updateTitle: PropTypes.string
 }

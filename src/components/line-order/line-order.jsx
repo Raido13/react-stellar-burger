@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectorBurgerIngridients } from '../../services/selectors';
+import PropTypes from 'prop-types';
 
-export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt, number: orderNumber, name: orderName, showStatus}) => { 
+export const LineOrder = ({order, showStatus}) => { 
+  const {ingredients: ingridientsIDs, status, createdAt, number: orderNumber, name: orderName} = order;
   const location = useLocation();
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
   const ingridients = ingridientsIDs.map(id => burgerIngridients.find(({_id}) => id === _id));
@@ -59,4 +61,9 @@ export const LineOrder = ({ingredients: ingridientsIDs, status, createdAt, numbe
       }
     </>
   )
+}
+
+LineOrder.propTypes = {
+  order: PropTypes.object.isRequired,
+  showStatus: PropTypes.bool
 }
