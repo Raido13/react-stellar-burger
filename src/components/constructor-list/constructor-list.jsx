@@ -1,10 +1,9 @@
 import styles from './constructor-list.module.css';
 import ConstructorIngridient from '../constructor-ingridient/constructor-ingridient';
 import { useSelector } from 'react-redux';
-import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function ConstructorList() {
-  const {ingridients} = useSelector(selectorConstructorIngridients);  
+  const ingridients = useSelector(store => store.constructorIngridients.ingridients);  
 
   return (
     <ul className={`${styles.constructorList} custom-scroll`}>

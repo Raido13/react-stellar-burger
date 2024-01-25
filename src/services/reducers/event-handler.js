@@ -10,7 +10,7 @@ const initialState = {
 export const eventHandlerReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case OPEN_MODAL: {
-			return {...state, modal: true}
+			return {...state, modal: action.kind}
 		}
 		case CLOSE_MODAL: {
 			return {...state, modal: false}

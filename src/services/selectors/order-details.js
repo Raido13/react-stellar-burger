@@ -1,1 +1,0 @@
-export const selectorOrderDetails = store => store.orderDetails;

@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {GET_COUNTER, REMOVE_INGRIDIENT_FROM_CART, SET_TOTAL_PRICE, UPDATE_INGRIDIENT_POSITIONS} from '../../services/actions/constructor-ingridients';
 import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import { useCallback, useRef } from 'react';
-import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function ConstructorIngridient({ingridient, id}) {
   const ref = useRef();
   const dispatch = useDispatch();
   const { name, price, image, type } = ingridient;
-  const {ingridients} = useSelector(selectorConstructorIngridients);
+  const ingridients = useSelector(store => store.constructorIngridients.ingridients);
 
   const moveIngridient = useCallback((dragId, hoverId) => {
     ingridients.splice(hoverId, 0, ...ingridients.splice(dragId, 1));

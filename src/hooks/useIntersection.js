@@ -8,7 +8,7 @@ export const useIntersection = parent => {
 
     const options = {
       threshold: [1, .7, .46],
-      rootMargin: '-300px 0px 0px 200px'
+      rootMargin: '-350px 0px 0px 200px'
     }
 
     const callback = entries => {

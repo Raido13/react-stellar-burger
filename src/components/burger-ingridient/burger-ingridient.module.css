@@ -1,16 +1,11 @@
 .burgerIngridient {
-  width: 272px;
-}
-
-.link {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
   align-items: center;
+  width: 272px;
   position: relative;
-  text-decoration: none;
   cursor: grab;
-  color: inherit;
 }
 
 .image {

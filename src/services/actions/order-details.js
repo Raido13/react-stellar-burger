@@ -1,47 +1,24 @@
-import {requestOrderNumber, requestOrderInfo} from '../../utils/api';
+import {getOrderNumber} from '../../utils/api';
 
-export const REQUEST_ORDER_NUMBER = 'REQUEST_ORDER_NUMBER';
-export const REQUEST_ORDER_NUMBER_SUCCESS = 'REQUEST_ORDER_NUMBER_SUCCESS';
-export const REQUEST_ORDER_NUMBER_FAILED = 'REQUEST_ORDER_NUMBER_FAILED';
-export const REQUEST_ORDER_INFO = 'REQUEST_ORDER_INFO';
-export const REQUEST_ORDER_INFO_SUCCESS = 'REQUEST_ORDER_INFO_SUCCESS';
-export const REQUEST_ORDER_INFO_FAILED = 'REQUEST_ORDER_INFO_FAILED';
+export const REQUEST_ORDER_DETAILS = 'REQUEST_ORDER_DETAILS';
+export const REQUEST_ORDER_DETAILS_SUCCESS = 'REQUEST_ORDER_DETAILS_SUCCESS';
+export const REQUEST_ORDER_DETAILS_FAILED = 'REQUEST_ORDER_DETAILS_FAILED';
 
-export const getOrderNumber = (ids) => {
+export const getOrderNumberID = (Ids) => {
   return function(dispatch) {
     dispatch({
-      type: REQUEST_ORDER_NUMBER
+      type: REQUEST_ORDER_DETAILS
     })
-    requestOrderNumber(ids)
+    getOrderNumber(Ids)
       .then(res => {
         dispatch({
-          type: REQUEST_ORDER_NUMBER_SUCCESS,
+          type: REQUEST_ORDER_DETAILS_SUCCESS,
           order: res
         })
       })
       .catch(() => {
         dispatch({
-          type: REQUEST_ORDER_NUMBER_FAILED
-        })
-      })
-  }
-}
-
-export const getOrderInfo = (number) => {
-  return function(dispatch) {
-    dispatch({
-      type: REQUEST_ORDER_INFO
-    })
-    requestOrderInfo(number)
-      .then(res => {
-        dispatch({
-          type: REQUEST_ORDER_INFO_SUCCESS,
-          orders: res
-        })
-      })
-      .catch(() => {
-        dispatch({
-          type: REQUEST_ORDER_INFO_FAILED
+          type: REQUEST_ORDER_DETAILS_FAILED
         })
       })
   }
