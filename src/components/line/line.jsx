@@ -18,7 +18,7 @@ export const Line = ({type, orders, ingridients}) => {
       return (
         <ul className={`${styles.line} ${styles[`${type}`]} custom-scroll`}>
           {ingridients.map((ingridient, id) => {
-            return (<LineIngridient key={id} ingridient={ingridient} counter={ingridients.filter(({_id}) => (_id === ingridient._id)).length} />)
+            return (<LineIngridient key={id} ingridient={ingridient} counter={ingridient.counter} />)
           })}
         </ul>
       )

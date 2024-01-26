@@ -14,6 +14,11 @@ export const OrderInfo = ({updateTitle, order, orderNumber}) => {
   const orderPrice = ingridients.reduce((totalPrice, {price}) => {return totalPrice + price}, 0);
   const orderCompound = 'Состав:';
 
+  // const filtredIngridients = ingridients.reduce((acc, item) => !acc.includes(({_id}) => _id === item._id) && [...acc, item = {...item, counter: ingridients.filter(({_id}) => _id === item._id).length}], []);
+  // const filtredIngridients = ingridients.map(item => ingridients.({...item, counter: ingridients.filter(({_id}) => _id === item._id).length}));
+  const filtredIngridients = ingridients.filter((item, idx) => ingridients.indexOf(item = {...item, counter: ingridients.filter(({_id}) => _id === item._id).length}) === idx);
+  console.log(filtredIngridients);
+
   const orderStatus = () => {
     switch(status) {
       case 'created': return 'Создан';
@@ -31,7 +36,7 @@ export const OrderInfo = ({updateTitle, order, orderNumber}) => {
         <p className={`text text_type_main-default ${styles[`${status}`]}`}>{orderStatus()}</p>
       </div>
       <p className={`text text_type_main-medium ${styles.orderCompound}`}>{orderCompound}</p>
-      <Line type={'orderInfo'} ingridients={ingridients}></Line>
+      <Line type={'orderInfo'} ingridients={filtredIngridients}></Line>
       <div className={styles.dataContainer}>
         <FormattedDate className="text text_type_main-default text_color_inactive" date={orderDate} />
         <div className={styles.price}>

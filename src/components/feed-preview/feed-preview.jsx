@@ -5,17 +5,17 @@ import { OrderInfo } from '../order-info/order-info';
 import { useSelector } from 'react-redux';
 import { selectorWebsocket } from '../../services/selectors';
 import { OrderDisplay } from '../order-display/order-display';
-
+import { useMemo } from 'react';
 export const FeedPreview = ({navCloseModal}) => {
   const location = useLocation();
   const {orderNumber} = useParams();
   const {commonOrders} = useSelector(selectorWebsocket);
-  const order = commonOrders.find(({number}) => number === +orderNumber);
 
+  const order = useMemo(() => commonOrders.find(({number}) => number === +orderNumber), [commonOrders, orderNumber]);
   return (
     <>
       {location.state?.preview
-            ? <Modal navCloseModal={navCloseModal}><OrderInfo orderNumber={orderNumber} order={order} updateTitle={'YES'} /></Modal>
+            ? order && <Modal navCloseModal={navCloseModal}><OrderInfo orderNumber={orderNumber} order={order} updateTitle={'YES'} /></Modal>
             : <OrderDisplay order={order} />
       }
     </>
