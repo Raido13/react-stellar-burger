@@ -1,11 +1,16 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import styles from './account.module.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../services/actions/authentication";
+import { wsUrlProfile } from "../../utils/api";
+import { selectorWebsocket } from "../../services/selectors";
+import { wsConnectionCloseProfile, wsConnectionStartProfile, wsGetProfileOrders } from "../../services/actions/websocket";
+import { useEffect } from "react";
 
 export const Account = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const {wsConnectProfile} = useSelector(selectorWebsocket);
   const active = isActive =>
                   isActive
                         ? `text text_type_main-medium text_color_inactive ${styles.link} ${styles.active}`
@@ -14,6 +19,15 @@ export const Account = () => {
   const onClick = () => {
     dispatch(userLogout());
   }
+
+  useEffect(() => {
+    wsConnectProfile
+          ? dispatch(wsGetProfileOrders)
+          : dispatch(wsConnectionStartProfile(`${wsUrlProfile}?token=${localStorage.getItem('accessToken').split(' ')[1]}`));
+    return () => {
+      dispatch(wsConnectionCloseProfile)
+    }
+  }, [dispatch, wsConnectProfile])
   
   return (
     <div className={styles.container}>

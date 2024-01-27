@@ -14,10 +14,12 @@ export const OrderInfo = ({updateTitle, order, orderNumber}) => {
   const orderPrice = ingridients.reduce((totalPrice, {price}) => {return totalPrice + price}, 0);
   const orderCompound = 'Состав:';
 
-  // const filtredIngridients = ingridients.reduce((acc, item) => !acc.includes(({_id}) => _id === item._id) && [...acc, item = {...item, counter: ingridients.filter(({_id}) => _id === item._id).length}], []);
-  // const filtredIngridients = ingridients.map(item => ingridients.({...item, counter: ingridients.filter(({_id}) => _id === item._id).length}));
-  const filtredIngridients = ingridients.filter((item, idx) => ingridients.indexOf(item = {...item, counter: ingridients.filter(({_id}) => _id === item._id).length}) === idx);
-  console.log(filtredIngridients);
+  const filtredIngridients = ingridients.reduce((acc, item) => {
+    if(!acc.some(({_id}) => _id === item._id)) {
+      return [...acc, {...item, counter: ingridients.filter(({_id}) => _id === item._id).length}]
+    }
+    return acc;
+  }, []);
 
   const orderStatus = () => {
     switch(status) {

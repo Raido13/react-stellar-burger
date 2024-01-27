@@ -13,7 +13,7 @@ export const BurgerIngridientsType = ({ingridients, ingridientsType, id}) => {
     <div className={styles.burgerIngridientsType} data-id={id}>
       <h2 className={`${styles.title} text text_type_main-medium`}>{text}</h2>
       <div className={styles.container}>
-        {ingridients.map((ingridient) => <BurgerIngridient ingridient={ingridient} key={ingridient._id}/>)}
+        {ingridients.map(ingridient => <BurgerIngridient ingridient={ingridient} key={ingridient._id}/>)}
       </div>
     </div>
   )

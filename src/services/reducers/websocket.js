@@ -6,7 +6,8 @@ import {
   WS_CONNECTION_ERROR_PROFILE,
   WS_CONNECTION_CLOSED_PROFILE,
   WS_GET_COMMON_ORDERS,
-  WS_GET_PROFILE_ORDERS
+  WS_GET_PROFILE_ORDERS,
+  WS_CLEAR_PROFILE_ORDERS
 } from '../actions/websocket';
 
 const initialState = {
@@ -43,6 +44,9 @@ export const websocketReducer = (state = initialState, action) => {
     }
     case WS_GET_PROFILE_ORDERS: {
       return {...state, profileOrders: action.payload.orders}
+    }
+    case WS_CLEAR_PROFILE_ORDERS: {
+      return {...state, wsConnectProfile: false, profileOrders: []}
     }
     default: return state;
   }

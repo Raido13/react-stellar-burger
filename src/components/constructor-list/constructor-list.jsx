@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { selectorConstructorIngridients } from '../../services/selectors';
 
 export default function ConstructorList() {
-  const {ingridients} = useSelector(selectorConstructorIngridients);  
-
+  const {ingridients} = useSelector(selectorConstructorIngridients);
+  
   return (
     <ul className={`${styles.constructorList} custom-scroll`}>
       {ingridients.map((ingridient, id) => {
-        return <ConstructorIngridient ingridient={ingridient} id={id} key={id} />
+        return <ConstructorIngridient ingridient={ingridient} id={id} key={ingridient.elemID} />
       })}
     </ul>
   )

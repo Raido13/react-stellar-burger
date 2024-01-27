@@ -1,4 +1,5 @@
 import {postSignUp, postSignIn, postLogout, postUpdate, getUser} from '../../utils/api';
+import { WS_CLEAR_PROFILE_ORDERS } from './websocket';
 
 export const SET_USER = 'SET_USER';
 export const SET_AUTH = 'SET_AUTH';
@@ -62,6 +63,7 @@ export const userLogout = () => {
               .catch(() => dispatch({type: ON_ERROR}))
               .finally(() => {
                 dispatch({type: SET_AUTH, auth: false});
+                dispatch({type: WS_CLEAR_PROFILE_ORDERS})
               })
   }
 }
