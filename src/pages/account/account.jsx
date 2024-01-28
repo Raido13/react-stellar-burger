@@ -1,14 +1,16 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import styles from './account.module.css';
 import { useDispatch } from "react-redux";
 import { userLogout } from "../../services/actions/authentication";
 
 export const Account = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const active = isActive =>
                   isActive
                         ? `text text_type_main-medium text_color_inactive ${styles.link} ${styles.active}`
                         : `text text_type_main-medium text_color_inactive ${styles.link}`;
+
   const onClick = () => {
     dispatch(userLogout());
   }
@@ -27,7 +29,10 @@ export const Account = () => {
             <button onClick={onClick} className={`text text_type_main-medium text_color_inactive ${styles.button}`}>Выйти</button>
           </li>
         </ul>
-        <p className={`text text_type_main-default text_color_inactive ${styles.caption}`}>В этом разделе вы можете <br /> изменить свои персональные данные</p>
+        {location.pathname === '/profile'
+              ? <p className={`text text_type_main-default text_color_inactive ${styles.caption}`}>В этом разделе вы можете <br /> изменить свои персональные данные</p>
+              : <p className={`text text_type_main-default text_color_inactive ${styles.caption}`}>В этом разделе вы можете <br /> просмотреть свою историю заказов</p>
+        }
       </nav>
       <Outlet />
     </div>

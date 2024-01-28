@@ -10,13 +10,46 @@ import thunk from "redux-thunk";
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from "react-dnd/dist/core";
 import { BrowserRouter as Router } from "react-router-dom";
+import { socketMiddleware } from "./services/middleware/socketMiddleware";
+import {
+  WS_CONNECTION_START_COMMON,
+  WS_CONNECTION_CLOSE_COMMON,
+  WS_CONNECTION_SUCCESS_COMMON,
+  WS_CONNECTION_ERROR_COMMON,
+  WS_CONNECTION_CLOSED_COMMON,
+  WS_CONNECTION_START_PROFILE,
+  WS_CONNECTION_CLOSE_PROFILE,
+  WS_CONNECTION_SUCCESS_PROFILE,
+  WS_CONNECTION_ERROR_PROFILE,
+  WS_CONNECTION_CLOSED_PROFILE,
+  WS_GET_COMMON_ORDERS,
+  WS_GET_PROFILE_ORDERS,
+} from './services/actions/websocket';
+
+const wsActionsCommonOrders = {
+  wsInit: WS_CONNECTION_START_COMMON,
+  wsClose: WS_CONNECTION_CLOSE_COMMON,
+  onOpen: WS_CONNECTION_SUCCESS_COMMON,
+  onError: WS_CONNECTION_ERROR_COMMON,
+  onClose: WS_CONNECTION_CLOSED_COMMON,
+  onGetOrders: WS_GET_COMMON_ORDERS
+}
+
+const wsActionsProfileOrders = {
+  wsInit: WS_CONNECTION_START_PROFILE,
+  wsClose: WS_CONNECTION_CLOSE_PROFILE,
+  onOpen: WS_CONNECTION_SUCCESS_PROFILE,
+  onError: WS_CONNECTION_ERROR_PROFILE,
+  onClose: WS_CONNECTION_CLOSED_PROFILE,
+  onGetOrders: WS_GET_PROFILE_ORDERS
+}
 
 const composeEnchancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
   : compose;
 
-const enchancer = composeEnchancers(applyMiddleware(thunk));
+const enchancer = composeEnchancers(applyMiddleware(thunk, socketMiddleware(wsActionsCommonOrders), socketMiddleware(wsActionsProfileOrders)));
 
 const store = createStore(rootReducer, enchancer);
 

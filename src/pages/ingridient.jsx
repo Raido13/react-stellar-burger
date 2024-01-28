@@ -1,4 +1,4 @@
-import IngridientDetails from "../components/Ingridient-details/Ingridient-details";
+import IngridientDetails from "../components/ingridient-details/ingridient-details";
 import styles from './ingridient.module.css';
 import Modal from "../components/modal/modal";
 import PropTypes from 'prop-types';
@@ -12,7 +12,7 @@ export const Ingridient = ({navCloseModal}) => {
       {location.state?.ingridientPage
           ? <Modal navCloseModal={navCloseModal}><IngridientDetails /></Modal>
           : <div className={styles.ingridient}>
-              <IngridientDetails />
+              <IngridientDetails updateTitle={'YES'} />
             </div>
       }
     </>

@@ -8,6 +8,8 @@ import { Home, SignIn, SignUp, Forgot, Recovery, Ingridient, Account, Update, Er
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { checkAuth } from '../../services/actions/authentication';
 import { selectorAuthentification, selectorBurgerIngridients } from '../../services/selectors';
+import { OrderPreview } from '../order-preview/order-preview';
+import { FeedPreview } from '../feed-preview/feed-preview';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -42,10 +44,16 @@ export default function App() {
                 <Route path='/reset-password' element={<ProtectedRoute unAuth={true} element={<Recovery />} />} />
                 <Route path='/profile' element={<ProtectedRoute element={<Account />} />} >
                   <Route path='' element={<ProtectedRoute element={<Update />} />} />
-                  <Route path='orders' element={<ProtectedRoute element={<Orders />} />} />
+                  <Route path='orders' element={<ProtectedRoute element={<Orders />} />}>
+                    {location.state?.preview && <Route path=':orderNumber' element={<ProtectedRoute element={<OrderPreview navCloseModal={navCloseModal}/>} />} />}
+                  </Route>
                 </Route>
-                <Route path='/feed' element={<Feed />} />
+                <Route path='feed' element={<Feed />}>
+                  {location.state?.preview && <Route path=':orderNumber' element={<FeedPreview navCloseModal={navCloseModal} />} />}
+                </Route>
                 <Route path='ingridients/:id' element={<Ingridient />} />
+                <Route path='profile/orders/:orderNumber' element={<ProtectedRoute element={<OrderPreview navCloseModal={navCloseModal} />} />} />
+                <Route path='feed/:orderNumber' element={<FeedPreview />} />
                 <Route path='*' element={<Err404 />} />
               </Routes>
             }

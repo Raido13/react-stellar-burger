@@ -6,7 +6,7 @@ export const Buttons = ({button, isVisible}) => {
   return (
     <>
       {isVisible !== undefined
-            ? <div className={`${styles.buttons} ${isVisible ? styles.active : ''}`}><Button type='primary' htmlType="submit" extraClass={styles.button}>{button}</Button><Button type='secondary' htmlType='reset' extraClass={styles.button}>Отмена</Button></div>
+            ? <div className={`${styles.buttons} ${isVisible ? styles.active : ''}`}><Button type='secondary' htmlType='reset' extraClass={styles.button}>Отмена</Button><Button type='primary' htmlType="submit" extraClass={styles.button}>{button}</Button></div>
             : <Button type='primary' htmlType="submit" extraClass={styles.button}>{button}</Button>
       }
     </>

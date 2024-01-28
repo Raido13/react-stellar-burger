@@ -1,4 +1,5 @@
 import {ADD_INGRIDIENT_TO_CART, SET_TOTAL_PRICE, REMOVE_INGRIDIENT_FROM_CART, GET_COUNTER, UPDATE_INGRIDIENT_POSITIONS, SET_EMPTY_CART} from '../actions/constructor-ingridients';
+import {v4 as uuidv4} from 'uuid';
 
 const initialState = {
   ingridients: [],
@@ -8,12 +9,7 @@ const initialState = {
 }
 
 const generateID = item => {
-  const prefix = ['a', 'z', 'b', 'x', 'w'];
-  let res = '';
-  prefix.forEach(() => {
-    res += prefix[Math.floor(Math.random()*prefix.length)];
-  });
-  return item = {...item, elemID: `${res}${Date.now()}`};
+  return item = {...item, elemID: uuidv4()};
 }
 
 export const constructorIngridientsReducer = (state = initialState, action) => {
