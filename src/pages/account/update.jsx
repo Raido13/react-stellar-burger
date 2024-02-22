@@ -1,6 +1,6 @@
 import { Form } from '../../components/form/form';
 import { Field } from "../../components/field/field";
-import { userUpdate } from '../../services/actions/authentication';
+import { userUpdate } from '../../services/actions/authentification';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorAuthentification } from '../../services/selectors';
 import styles from './account.module.css';

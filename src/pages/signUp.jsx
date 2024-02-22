@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from './auth.module.css';
 import { Form } from "../components/form/form";
 import { Field } from "../components/field/field";
-import { userSignUp } from "../services/actions/authentication";
+import { userSignUp } from "../services/actions/authentification";
 import { useDispatch } from "react-redux";
 
 export const SignUp = () => {

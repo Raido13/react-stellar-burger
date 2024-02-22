@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import styles from './account.module.css';
 import { useDispatch } from "react-redux";
-import { userLogout } from "../../services/actions/authentication";
+import { userLogout } from "../../services/actions/authentification";
 
 export const Account = () => {
   const location = useLocation();

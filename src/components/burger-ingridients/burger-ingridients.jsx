@@ -10,7 +10,7 @@ export default function BurgerIngridients() {
   const dispatch = useDispatch();
   const sortedData = [[], [], []];
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
-  const parentRef = useRef();
+  const parentRef = useRef(null);
   const currentView = useIntersection(parentRef);
   useEffect(() => {
     dispatch({type: SET_PARENT, parent: parentRef});

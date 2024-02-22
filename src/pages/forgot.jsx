@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from './auth.module.css';
 import { Form } from "../components/form/form";
 import { Field } from "../components/field/field";
-import { ON_ERROR } from "../services/actions/authentication";
+import { ON_ERROR } from "../services/actions/authentification";
 import { postForgot } from '../utils/api';
 import { useDispatch } from "react-redux";
 
