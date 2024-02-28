@@ -3,7 +3,7 @@ import styles from './modal.module.css';
 import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalOverlay } from '../modal-overlay/modal-overlay';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import {CLOSE_MODAL} from '../../services/actions/event-handler';
 import { TChildren } from '../../services/types';
 

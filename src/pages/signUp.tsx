@@ -15,9 +15,9 @@ export const SignUp = () => {
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Регистрация'} button={'Зарегистрироваться'} entries={[
-          { initialValue: '', name: 'name', placeholder: 'Имя', Field: (props: IFormProps) => <Field {...props} /> },
-          { initialValue: '', name: 'email', placeholder: 'E-mail', Field: (props: IFormProps) => <Field {...props} /> },
-          { initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
+          { fillForm: () => {}, initialValue: '', name: 'name', placeholder: 'Имя', Field: (props: IFormProps) => <Field {...props} />},
+          { fillForm: () => {}, initialValue: '', name: 'email', placeholder: 'E-mail', Field: (props: IFormProps) => <Field {...props} /> },
+          { fillForm: () => {}, initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
         ]}
       />
       <ul className={styles.list}>

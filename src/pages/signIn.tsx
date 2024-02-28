@@ -15,8 +15,8 @@ export const SignIn = () => {
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Вход'} button={'Войти'} entries={[
-          { initialValue: '', name: 'email', placeholder: 'E-mail', Field: (props: IFormProps) => <Field {...props} /> },
-          { initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
+          { fillForm: () => {}, initialValue: '', name: 'email', placeholder: 'E-mail', Field: (props: IFormProps) => <Field {...props} /> },
+          { fillForm: () => {}, initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
         ]}
       />
       <ul className={styles.list}>

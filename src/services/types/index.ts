@@ -11,7 +11,8 @@ import {
   TSignIn,
   TSignUp,
   TChildren,
-  IFormProps
+  IFormProps,
+  IField
 } from './types';
 import { TAuthActions } from '../actions/authentification';
 
@@ -33,5 +34,6 @@ export type {
   TSignIn,
   TSignUp,
   TChildren,
-  IFormProps
+  IFormProps,
+  IField
 }

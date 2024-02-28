@@ -1,6 +1,6 @@
 import style from './app-header.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { NavLink, useLocation } from 'react-router-dom';
 import { selectorBurgerIngridients } from '../../services/selectors';
 

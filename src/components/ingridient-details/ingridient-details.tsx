@@ -2,16 +2,16 @@ import { selectorBurgerIngridients } from '../../services/selectors';
 import styles from './ingridient-details.module.css';
 import { useSelector } from '../../services/hooks';
 import { useParams } from "react-router-dom";
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 
-export const IngridientDetails: FC<{updateTitle : string | undefined}> = ({updateTitle}) : any => {
+export const IngridientDetails: FC<{updateTitle : string | undefined}> = ({updateTitle}): ReactElement => {
   const {burgerIngridients} = useSelector(selectorBurgerIngridients);
   const {id} = useParams();
   
   const ingridient = burgerIngridients.find(({_id}) => _id === id);
   
   return (
-    ingridient !== undefined &&
+    (ingridient !== undefined &&
       <div className={styles.ingridientDetails}>
         <h3 className={`${!!updateTitle ? styles.title2 : styles.title} text text_type_main-large`}>Детали ингридиента</h3>
         <img className={`${styles.img}`} src={ingridient.image_large} alt={ingridient.name} />
@@ -34,6 +34,6 @@ export const IngridientDetails: FC<{updateTitle : string | undefined}> = ({updat
             <p className={`${styles.paragraph} text_type_digits-default`}>{ingridient.carbohydrates}</p>
           </li>
         </ul>
-      </div>
+      </div>) as ReactElement
   )
 }

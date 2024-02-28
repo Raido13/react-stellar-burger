@@ -23,7 +23,7 @@ export const Forgot = () => {
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Восстановление пароля'} button={'Восстановить'} entries={[
-          { initialValue: '', name: 'email', placeholder: 'Укажите e-mail', Field: (props: IFormProps) => <Field {...props} /> },
+          { fillForm: () => {}, initialValue: '', name: 'email', placeholder: 'Укажите e-mail', Field: (props: IFormProps) => <Field {...props} /> },
         ]}
       />
       <ul className={styles.list}>

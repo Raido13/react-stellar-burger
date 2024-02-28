@@ -1,3 +1,4 @@
+import { Middleware } from 'redux';
 import {wsAwaitRequest} from '../../utils/api';
 
 type TMiddleWareActions = {
@@ -9,9 +10,7 @@ type TMiddleWareActions = {
   onGetOrders: string
 }
 
-type TMiddleWare = (actions: TMiddleWareActions) => (store: any) => (next: any) => (action: any) => void
-
-export const socketMiddleware : TMiddleWare = (actions) => {
+export const socketMiddleware = (actions: TMiddleWareActions): Middleware => {
   return store => {
     let socket: WebSocket;
     let isConnected = false;

@@ -18,9 +18,9 @@ export const Update = () => {
   return (
     <div className={styles.update}>
       <Form onSubmit={onSubmit} title={null} button={'Сохранить'} entries={[
-        { initialValue: name, name: 'name', placeholder: 'Имя', Field: (props: IFormProps) => <Field {...props} /> },
-        { initialValue: email, name: 'email', placeholder: 'Логин', Field: (props: IFormProps) => <Field {...props} /> },
-        { initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
+        { fillForm: () => {}, initialValue: name, name: 'name', placeholder: 'Имя', Field: (props: IFormProps) => <Field {...props} /> },
+        { fillForm: () => {}, initialValue: email, name: 'email', placeholder: 'Логин', Field: (props: IFormProps) => <Field {...props} /> },
+        { fillForm: () => {}, initialValue: '', name: 'password', placeholder: 'Пароль', Field: (props: IFormProps) => <Field {...props} /> }
       ]}
       />
     </div>

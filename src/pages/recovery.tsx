@@ -31,8 +31,8 @@ export const Recovery = () => {
   return (
     <div className={styles.container}>
       <Form onSubmit={onSubmit} title={'Восстановление пароля'} button={'Сохранить'} entries={[
-          { initialValue: '', name: 'password', placeholder: 'Введите новый пароль', Field: (props: IFormProps) => <Field {...props} /> },
-          { initialValue: '', name: 'token', placeholder: 'Введите код из письма', Field: (props: IFormProps) => <Field {...props} /> }
+          { fillForm: () => {}, initialValue: '', name: 'password', placeholder: 'Введите новый пароль', Field: (props: IFormProps) => <Field {...props} /> },
+          { fillForm: () => {}, initialValue: '', name: 'token', placeholder: 'Введите код из письма', Field: (props: IFormProps) => <Field {...props} /> }
         ]}
       />
       <ul className={styles.list}>

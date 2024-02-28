@@ -23,6 +23,15 @@ type TGetIngridients = TCheckSuccess<{ data: TIngridient[] }>
 
 interface IRefresh { success: boolean; refreshToken: string; accessToken: string }
 
+type TOptions = {
+  method?: string;
+  headers: {
+    'Content-Type': string;
+    authorization?: string
+  }
+  body?: BodyInit
+}
+
 const checkResponse = (res : Response) => {
   return res.ok
             ? res.json()
@@ -36,7 +45,7 @@ const checkSuccess = <T>(res : TCheckSuccess<T>) : Promise<T> | T => {
             : Promise.reject(res)
 }
 
-const request = <T>(endpoint : string, options? : {}) : Promise<T> => {
+const request = <T>(endpoint : string, options?: TOptions) : Promise<T> => {
   return fetch(`${baseUrl}${endpoint}`, options)
             .then(checkResponse)
             .then(checkSuccess<T>)
@@ -48,7 +57,7 @@ export const getIngridients = () : Promise<TIngridient[]> => {
 }
 
 export const requestOrderNumber = (ids : string[]) : Promise<TOrder> => {
-  return awaitRequest<TGetOrder>('orders', {method: 'POST', headers: {'Content-Type': 'application/json', authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'ingredients': ids})})
+  return awaitRequest<TGetOrder>('orders', {method: 'POST', headers: {'Content-Type': 'application/json', authorization: localStorage.getItem('accessToken')!}, body: JSON.stringify({'ingredients': ids})})
             .then(res => res.order);
 }
 
@@ -59,12 +68,12 @@ export const requestOrderInfo = (number : number) : Promise<TOrder[]> => {
 
 export const refreshToken = () : Promise<IRefresh> => request('auth/token', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({token: localStorage.getItem('refreshToken')})})
 
-export const awaitRequest = async <T>(endpoint : string, options : {[key : string] : any}) : Promise<T> => {
+export const awaitRequest = async <T>(endpoint : string, options: TOptions): Promise<T> => {
   try {
     const res = await fetch(`${baseUrl}${endpoint}`, options);
     return await checkResponse(res)
-  } catch (err : any) {
-    if(err.message === 'jwt expired') {
+  } catch (err: any) {
+    if(err instanceof Error && err.message === 'jwt expired') {
       const refresh = await refreshToken();
       if(!refresh.success) {
         return Promise.reject(refresh)
@@ -79,7 +88,7 @@ export const awaitRequest = async <T>(endpoint : string, options : {[key : strin
       return await checkResponse(res);
       
     } else {
-      return Promise.reject(err);
+      throw(err);
     }
   }
 }
@@ -105,6 +114,6 @@ export const postForgot = (email: string) => request('password-reset', {method: 
 
 export const postRecovery = (password: string, token: string) => request('password-reset/reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'token': token, 'password': password})})
 
-export const postUpdate = ({name, email, password} : TSignUp) : Promise<TGetUser> => awaitRequest<TSetUser>('auth/user', {method: 'PATCH', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'name': name, 'email': email, 'password': password})})
+export const postUpdate = ({name, email, password} : TSignUp) : Promise<TGetUser> => awaitRequest<TSetUser>('auth/user', {method: 'PATCH', headers: {'Content-Type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')!}, body: JSON.stringify({'name': name, 'email': email, 'password': password})})
 
-export const getUser = () : Promise<TGetUser> => awaitRequest<TSetUser>('auth/user', {method: 'GET', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}})
+export const getUser = () : Promise<TGetUser> => awaitRequest<TSetUser>('auth/user', {method: 'GET', headers: {'Content-Type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')!}})

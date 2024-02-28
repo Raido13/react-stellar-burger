@@ -1,9 +1,9 @@
 import styles from './form.module.css';
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { Buttons } from '../buttons/buttons';
-import { IFormProps } from '../../services/types';
+import { IField } from '../../services/types';
 
-export const Form: FC<{onSubmit: (formState : {[key: string]: string}) => void, entries: (IFormProps & any)[], title: string | null | undefined, button: string}> = ({onSubmit, entries, title, button}) => {
+export const Form: FC<{onSubmit: (formState : {[key: string]: string}) => void, entries: IField[], title: string | null | undefined, button: string}> = ({onSubmit, entries, title, button}) => {
   const state : {[key: string] : string} = entries.reduce((obj, it) => ({...obj, [it.name]: it.initialValue}), {})
   const [formState, setFormState] = useState(state);
   const [isVisible, setIsVisible] = useState(false);

@@ -1,4 +1,4 @@
-import { ChangeEvent, type ReactNode } from "react";
+import { ChangeEvent, FC, type ReactNode } from "react";
 
 export type TIngridient = {
   name: string;
@@ -42,4 +42,5 @@ export type TSignIn = {
 export type TSignUp = TSignIn & { name: string }
 export type TChildren = { children?: ReactNode }
 
-export interface IFormProps { name: string, initialValue: string, placeholder: string, fillForm: (e: ChangeEvent) => void }
+export interface IFormProps { name: string, initialValue: string, placeholder: string, fillForm: (e: ChangeEvent<HTMLInputElement>) => void }
+export interface IField extends IFormProps { Field: FC<IFormProps> }
