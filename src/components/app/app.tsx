@@ -51,9 +51,9 @@ export default function App() {
                 <Route path='feed' element={<Feed />}>
                   {location.state?.preview && <Route path=':orderNumber' element={<FeedPreview navCloseModal={navCloseModal} />} />}
                 </Route>
-                <Route path='ingridients/:id' element={<Ingridient />} />
+                <Route path='ingridients/:id' element={<Ingridient navCloseModal={undefined} />} />
                 <Route path='profile/orders/:orderNumber' element={<ProtectedRoute element={<OrderPreview navCloseModal={navCloseModal} />} />} />
-                <Route path='feed/:orderNumber' element={<FeedPreview />} />
+                <Route path='feed/:orderNumber' element={<FeedPreview navCloseModal={undefined} />} />
                 <Route path='*' element={<Err404 />} />
               </Routes>
             }

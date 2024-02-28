@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { ChangeEvent, type ReactNode } from "react";
 
 export type TIngridient = {
   name: string;
@@ -6,7 +6,7 @@ export type TIngridient = {
   type: string;
   proteins: number;
   fat: number;
-  carbohyrates: number;
+  carbohydrates: number;
   calories: number;
   price: number;
   image: string;
@@ -17,6 +17,7 @@ export type TIngridient = {
 
 export type TIngridientUid = TIngridient & { elemID: string }
 export type TIngridientIdx = TIngridient & { id: number }
+export type TIngridientCount = TIngridient & { counter: number }
 
 export type TOrder = {
   ingredients: string[];
@@ -40,3 +41,5 @@ export type TSignIn = {
 
 export type TSignUp = TSignIn & { name: string }
 export type TChildren = { children?: ReactNode }
+
+export interface IFormProps { name: string, initialValue: string, placeholder: string, fillForm: (e: ChangeEvent) => void }

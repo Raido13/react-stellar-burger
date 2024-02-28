@@ -5,11 +5,13 @@ import {
   TIngridient,
   TIngridientUid,
   TIngridientIdx,
+  TIngridientCount,
   TOrder,
   TUser,
   TSignIn,
   TSignUp,
-  TChildren
+  TChildren,
+  IFormProps
 } from './types';
 import { TAuthActions } from '../actions/authentification';
 
@@ -25,9 +27,11 @@ export type {
   TIngridient,
   TIngridientUid,
   TIngridientIdx,
+  TIngridientCount,
   TOrder,
   TUser,
   TSignIn,
   TSignUp,
-  TChildren
+  TChildren,
+  IFormProps
 }

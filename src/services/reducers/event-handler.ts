@@ -1,9 +1,10 @@
+import { MutableRefObject } from 'react';
 import { OPEN_MODAL, CLOSE_MODAL, SWITCH_TAB, SET_PARENT, SET_IS_HOVER, THandlerActions } from '../actions/event-handler';
 
 export type THandlerState = {
 	modal: boolean;
 	tab: string;
-	parent: HTMLDivElement | null,
+	parent: MutableRefObject<HTMLDivElement> | null,
 	isHover: boolean
 }
 

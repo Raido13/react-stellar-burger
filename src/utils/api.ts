@@ -101,9 +101,9 @@ export const postSignIn = ({email, password} : TSignIn) : Promise<TSetUser> => r
 
 export const postLogout = () => request('auth/logout', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'token': localStorage.getItem('refreshToken')})})
 
-export const postForgot = ({email} : { email: string }) => request('password-reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'email': email})})
+export const postForgot = (email: string) => request('password-reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'email': email})})
 
-export const postRecovery = ({password, token} : { password: string; token: string }) => request('password-reset/reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'token': token, 'password': password})})
+export const postRecovery = (password: string, token: string) => request('password-reset/reset', {method: 'POST', headers: defaultHeaders, body: JSON.stringify({'token': token, 'password': password})})
 
 export const postUpdate = ({name, email, password} : TSignUp) : Promise<TGetUser> => awaitRequest<TSetUser>('auth/user', {method: 'PATCH', headers: {'Content-type': 'application/json;charset=utf-8', authorization: localStorage.getItem('accessToken')}, body: JSON.stringify({'name': name, 'email': email, 'password': password})})
 

@@ -110,8 +110,10 @@ export const checkAuth : AppThunk = () => {
   return function(dispatch : AppDispatch) {
     dispatch(setRequestAction(true));
     if(localStorage.getItem('accessToken')) {
-      dispatch(setUser());
       return getUser()
+            .then(res => {
+              dispatch(setUserAction(res.user))
+            })
             .catch(() => {
               localStorage.removeItem('accessToken');
               localStorage.removeItem('refreshToken');

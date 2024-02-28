@@ -16,7 +16,10 @@ export default function AppHeader() {
                               ? 'primary'
                               : 'secondary';
 
-  const customActive = burgerIngridients.reduce<string[]>((arr, {_id})  => ([...arr, `/ingridients/${_id}`]), []).includes(pathname);
+  const strings : string[] = [];
+  burgerIngridients.map(({_id}: {_id: string}) => [...strings, `/ingridients/${_id}`]);
+  
+  const customActive = strings.includes(pathname);
 
   return (
     <header className={`${style.header} pt-4 pb-4`}>

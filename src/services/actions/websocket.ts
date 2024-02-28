@@ -26,7 +26,7 @@ type TConnectionErrorProfileAction = { readonly type: typeof WS_CONNECTION_ERROR
 type TConnectionClosedProfileAction = { readonly type: typeof WS_CONNECTION_CLOSED_PROFILE, readonly wsConnectProfile: boolean, readonly profileOrders: [] | TOrder[] }
 type TGetCommonOrdersAction = { readonly type: typeof WS_GET_COMMON_ORDERS, readonly payload: { orders: [] | TOrder[], readonly total: null | number, readonly totalToday: null | number} }
 type TWSGetCommonOrdersAction = { readonly type: typeof WS_GET_COMMON_ORDERS }
-type TGetProfileOrdersAction = { readonly type: typeof WS_GET_PROFILE_ORDERS, readonly payload: { orders: [] | TOrder[]} }
+type TGetProfileOrdersAction = { readonly type: typeof WS_GET_PROFILE_ORDERS, readonly payload: { orders: [] | TOrder[] } }
 type TWSGetProfileOrdersAction = { readonly type: typeof WS_GET_PROFILE_ORDERS }
 type TClearProfileOrdersAction = { readonly type: typeof WS_CLEAR_PROFILE_ORDERS, readonly wsConnectProfile: boolean, readonly profileOrders: [] }
 
