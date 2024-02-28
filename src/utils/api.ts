@@ -72,7 +72,7 @@ export const awaitRequest = async <T>(endpoint : string, options: TOptions): Pro
   try {
     const res = await fetch(`${baseUrl}${endpoint}`, options);
     return await checkResponse(res)
-  } catch (err: any) {
+  } catch (err) {
     if(err instanceof Error && err.message === 'jwt expired') {
       const refresh = await refreshToken();
       if(!refresh.success) {
