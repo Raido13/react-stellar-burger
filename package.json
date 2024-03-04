@@ -2,7 +2,7 @@
   "name": "react-burger-starter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://Raido13.github.io/react-stellar-burger",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@types/uuid": "^9.0.8",

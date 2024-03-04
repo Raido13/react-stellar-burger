@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from "react-dnd/dist/core";
